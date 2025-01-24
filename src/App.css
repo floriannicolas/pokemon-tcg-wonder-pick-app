@@ -14,10 +14,14 @@ html, body {
   width: 724px;
   height: 650px;
   margin: 0 auto;
+  perspective: 2000px;
+  transform-style: preserve-3d;
 }
 
 .card {
   position: absolute;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
   background-color: transparent;
   flex: 0 0 30%;
   width: 220px;
@@ -60,7 +64,7 @@ html, body {
   transform-style: preserve-3d;
 }
 
-.card .card-inner .front, 
+.card .card-inner .front,
 .card .card-inner .back {
   position: absolute;
   width: 100%;
@@ -77,7 +81,7 @@ html, body {
 }
 
 .content-cards.flipped .card .card-inner {
-  transform: rotateY(180deg);
+  /* transform: rotateY(180deg); */
 }
 
 .content-cards.centered .card {
@@ -87,28 +91,79 @@ html, body {
   transform: translate(-50%, -50%);
 }
 
-.content-cards.shuffled .card {
-  animation-duration: 0.8s;
+.content-cards.spread .card {
+  --spread-distance: 1.0;
+  --ellipse-width: 300px;
+  --ellipse-height: 200px;
+  --tilt-angle: -15deg;
+  animation: spread-cards 0.35s ease-out forwards;
 }
 
-.content-cards.shuffled .card:nth-child(1) {
-  animation-name: shuffled-card-1;
+.content-cards.spread .card:nth-child(1) {
+  --angle: 222deg;
 }
 
-.content-cards.shuffled .card:nth-child(2) {
-  animation-name: shuffled-card-2;
+.content-cards.spread .card:nth-child(2) {
+  --angle: 294deg;
 }
 
-.content-cards.shuffled .card:nth-child(3) {
-  animation-name: shuffled-card-3;
+.content-cards.spread .card:nth-child(3) {
+  --angle: 6deg;
 }
 
-.content-cards.shuffled .card:nth-child(4) {
-  animation-name: shuffled-card-4;
+.content-cards.spread .card:nth-child(4) {
+  --angle: 78deg;
 }
 
-.content-cards.shuffled .card:nth-child(5) {
-  animation-name: shuffled-card-5;
+.content-cards.spread .card:nth-child(5) {
+  --angle: 150deg;
+}
+
+@keyframes spread-cards {
+  from {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(var(--tilt-angle));
+    z-index: calc(5 + sin(var(--angle)));
+  }
+  to {
+    top: 50%;
+    left: 50%;
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--tilt-angle))
+      translate(
+        calc(var(--ellipse-width) * cos(var(--angle))),
+        calc(var(--ellipse-height) * sin(var(--angle)))
+      );
+    z-index: calc(5 + sin(var(--angle)));
+  }
+}
+
+/* Set original positions as CSS variables with row offsets */
+.content-cards .card:nth-child(1) {
+  --original-top: -20px;  /* 0px - 20px offset for top row */
+  --original-left: 0;
+}
+
+.content-cards .card:nth-child(2) {
+  --original-top: -20px;  /* 0px - 20px offset for top row */
+  --original-left: 252px;
+}
+
+.content-cards .card:nth-child(3) {
+  --original-top: -20px;  /* 0px - 20px offset for top row */
+  --original-left: 504px;
+}
+
+.content-cards .card:nth-child(4) {
+  --original-top: 359px;  /* 339px + 20px offset for bottom row */
+  --original-left: 126px;
+}
+
+.content-cards .card:nth-child(5) {
+  --original-top: 359px;  /* 339px + 20px offset for bottom row */
+  --original-left: 378px;
 }
 
 .content-cards.selectable .card {
@@ -119,150 +174,66 @@ html, body {
   transform: rotateY(0deg);
 }
 
-@keyframes shuffled-card-1 {
-  0%  {
+@keyframes shuffled-card {
+  0% {
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(1) rotate(-15deg);
+    z-index: 5;
   }
-  25%  {
-    top: 20%;
-    left: 80%;
-    transform: translate(-50%, -50%);
+  25% {
+    top: 40%;  /* Higher position for the left side */
+    left: 85%;
+    transform: translate(-50%, -50%) scale(0.9) rotate(-15deg);
+    z-index: 0;
   }
-  50%  {
-    top: 20%;
-    left: 20%;
-    transform: translate(-50%, -50%);
+  50% {
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.7) rotate(-15deg);
+    z-index: -5;
   }
-  75%  {
-    top: 80%;
-    left: 20%;
-    transform: translate(-50%, -50%);
+  75% {
+    top: 60%;  /* Lower position for the right side */
+    left: 15%;
+    transform: translate(-50%, -50%) scale(0.9) rotate(-15deg);
+    z-index: 0;
   }
   100% {
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(1) rotate(-15deg);
+    z-index: 5;
   }
 }
 
-@keyframes shuffled-card-2 {
-  0%  {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  25%  {
-    top: 80%;
-    left: 20%;
-    transform: translate(-50%, -50%);
-  }
-  50%  {
-    top: 80%;
-    left: 80%;
-    transform: translate(-50%, -50%);
-  }
-  75%  {
-    top: 35%;
-    left: 20%;
-    transform: translate(-50%, -50%);
-  }
-  100% {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+.content-cards.shuffled .card {
+  animation-duration: 0.8s;
+  animation-name: shuffled-card;
+  animation-timing-function: linear;
+  animation-iteration-count: 2;
 }
 
-
-@keyframes shuffled-card-3 {
-  0%  {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  25%  {
-    top: 45%;
-    left: 90%;
-    transform: translate(-50%, -50%);
-  }
-  50%  {
-    top: 30%;
-    left: 65%;
-    transform: translate(-50%, -50%);
-  }
-  75%  {
-    top: 20%;
-    left: 80%;
-    transform: translate(-50%, -50%);
-  }
-  100% {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+.content-cards.shuffled .card:nth-child(1) {
+  animation-delay: 0s;
 }
 
-@keyframes shuffled-card-4 {
-  0%  {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  25%  {
-    top: 30%;
-    left: 70%;
-    transform: translate(-50%, -50%);
-  }
-  50%  {
-    top: 35%;
-    left: 65%;
-    transform: translate(-50%, -50%);
-  }
-  75%  {
-    top: 78%;
-    left: 22%;
-    transform: translate(-50%, -50%);
-  }
-  100% {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+.content-cards.shuffled .card:nth-child(2) {
+  animation-delay: 0.12s;
 }
 
-@keyframes shuffled-card-5 {
-  0%  {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  25%  {
-    top: 19%;
-    left: 27%;
-    transform: translate(-50%, -50%);
-  }
-  50%  {
-    top: 43%;
-    left:83%;
-    transform: translate(-50%, -50%);
-  }
-  75%  {
-    top: 91%;
-    left: 21%;
-    transform: translate(-50%, -50%);
-  }
-  100% {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+.content-cards.shuffled .card:nth-child(3) {
+  animation-delay: 0.24s;
 }
 
+.content-cards.shuffled .card:nth-child(4) {
+  animation-delay: 0.36s;
+}
 
+.content-cards.shuffled .card:nth-child(5) {
+  animation-delay: 0.48s;
+}
 
 .content-actions {
   margin-top: 32px;
 }
-

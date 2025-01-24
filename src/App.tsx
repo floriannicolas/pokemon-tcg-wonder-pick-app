@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react'
-import './App.css'
+import { useMemo, useState } from 'react';
+import './App.css';
 
 const initialCardsList = [
   '/cards/blue.webp',
@@ -14,7 +14,7 @@ const forcedCard = '/cards/pidgey.webp';
 function App() {
   const [game, setGame] = useState<number>(0);
   const randomCardsList = useMemo(
-    () => initialCardsList.sort((a, b) => 0.5 - Math.random()),
+    () => initialCardsList.sort(() => 0.5 - Math.random()),
     []
   );
   const [cards, setCards] = useState(randomCardsList);
@@ -24,14 +24,17 @@ function App() {
   const launchWonderPick = () => {
     setGameState('flipped');
     setTimeout(() => {
-      setCards(cards.sort((a, b) => 0.5 - Math.random()));
+      // setCards(cards.sort(() => 0.5 - Math.random()));
       setGameState('flipped centered');
       setTimeout(() => {
-        setGameState('flipped centered shuffled');
-        setTimeout(() => {
-          setGameState('flipped selectable');
-        }, 1200);
-      }, 1000);
+        setGameState('flipped centered spread');
+        // setTimeout(() => {
+        //   setGameState('flipped centered spread shuffle');
+        // }, 1000)
+        // setTimeout(() => {
+        //   setGameState('flipped selectable');
+        // }, 1600);
+      }, 350);
     }, 1000);
   }
 

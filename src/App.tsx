@@ -10,19 +10,12 @@ const initialCardsList = [
 ];
 
 const forcedCard = '/cards/pidgey.webp';
-const getRandomCardsList = (array: string[], game: number) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (game/100) * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-};
 
 function App() {
   const [game, setGame] = useState<number>(0);
   const randomCardsList = useMemo(
-    () => getRandomCardsList(initialCardsList, game),
-    [game]
+    () => initialCardsList.sort((a, b) => 0.5 - Math.random()),
+    []
   );
   const [cards, setCards] = useState(randomCardsList);
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
@@ -31,6 +24,7 @@ function App() {
   const launchWonderPick = () => {
     setGameState('flipped');
     setTimeout(() => {
+      setCards(cards.sort((a, b) => 0.5 - Math.random()));
       setGameState('flipped centered');
       setTimeout(() => {
         setGameState('flipped centered shuffled');
@@ -43,7 +37,7 @@ function App() {
 
   const resetGame = () => {
     setGame(game + 1);
-    setCards(randomCardsList);
+    setCards(cards.sort((a, b) => 0.5 - Math.random()));
     setSelectedCard(null);
     setGameState('');
   }

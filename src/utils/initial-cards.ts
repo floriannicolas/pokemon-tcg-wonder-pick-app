@@ -102,7 +102,10 @@ export const getInitialCards = (forcePidgey: boolean) => {
     }
 
     const cardsList = A1A_CARDS.sort(() => Math.random() - 0.5).slice(0, 5);
-    const prePickedCard = cardsList[Math.floor(Math.random() * cardsList.length)];
+    
+    const prePickedCard = (cardsList.includes(FORCED_CARD_PIDGEY))
+        ? FORCED_CARD_PIDGEY
+        : cardsList[Math.floor(Math.random() * cardsList.length)];
 
     return {
         cardsList,

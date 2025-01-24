@@ -79,7 +79,7 @@ function App() {
 
   return (
     <>
-      <div className={`content-cards ${gameState}`}>
+      <div className={`content-cards ${gameState}`}>  
         {cards.map((url, index) => (
           <div
             id={`card-${game}-${index}`}

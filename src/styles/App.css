@@ -1,5 +1,5 @@
 html, body {
-  background-color: #EFF9FE;
+  background-color: #E8F0F8;
 }
 
 #root {
@@ -156,3 +156,22 @@ html, body {
 .content-actions {
   margin-top: 32px;
 }
+
+.content-actions button {
+  padding: 8px 32px;
+  height: 46px;
+  box-sizing: border-box;
+  border: none;
+  background-color: #3AC0B3;
+  color: #fff;
+  border-radius: 23px;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+.content-actions button:hover {
+  background-color: #37e6d5;
+}
+.content-actions button:focus {
+  outline: 0;
+}
+

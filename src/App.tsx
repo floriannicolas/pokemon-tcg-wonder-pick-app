@@ -1,12 +1,13 @@
 import { useMemo, useState } from 'react'
-import './App.css'
+import './styles/animations.css'
+import './styles/App.css'
 import { getInitialCards, FORCED_CARD } from './utils/initial-cards';
 
 function App() {
   const [game, setGame] = useState<number>(0);
   const initialCards = getInitialCards();
   const randomCardsList = useMemo(
-    () => initialCards.sort((a, b) => 0.5 - Math.random()),
+    () => initialCards.sort(() => 0.5 - Math.random()),
     []
   );
   const [cards, setCards] = useState(randomCardsList);
@@ -16,15 +17,18 @@ function App() {
   const launchWonderPick = () => {
     setGameState('flipped');
     setTimeout(() => {
-      setCards(cards.sort((a, b) => 0.5 - Math.random()));
+      setCards(cards.sort(() => 0.5 - Math.random()));
       setGameState('flipped centered');
       setTimeout(() => {
-        setGameState('flipped centered shuffled');
+        setGameState('flipped centered shuffled');       
         setTimeout(() => {
-          setGameState('flipped selectable');
-        }, 1200);
-      }, 1000);
-    }, 1000);
+          setGameState('flipped');
+          setTimeout(() => {
+            setGameState('flipped selectable');
+          }, 800);
+        }, 1600);
+      }, 1400);
+    }, 2000);
   }
 
   const resetGame = () => {
@@ -75,7 +79,6 @@ function App() {
             className='card'
             key={`card-${game}-${index}`}
             onClick={() => {
-              console.log('card.onClick');
               selectCard(index, url);
             }}
           >

@@ -87,13 +87,26 @@ const A1A_CARDS = [
     '/cards/a1a/cTR_20_000230_00_LEAF_SR.webp',
 ];
 
-export const FORCED_CARD = '/cards/a1a/cPK_10_002700_00_POPPO_C.webp';
+export const FORCED_CARD_PIDGEY = '/cards/a1a/cPK_10_002700_00_POPPO_C.webp';
 
 
-export const getInitialCards = () => {
-    const filteredArray = A1A_CARDS.filter(item => item !== FORCED_CARD);
-    const shuffledArray = filteredArray.sort(() => Math.random() - 0.5);
+export const getInitialCards = (forcePidgey: boolean) => {
+    if (forcePidgey) {
+        const filteredArray = A1A_CARDS.filter(item => item !== FORCED_CARD_PIDGEY);
+        const cardsList = filteredArray.sort(() => Math.random() - 0.5).slice(0, 4);
 
-    return [...shuffledArray.slice(0, 4), FORCED_CARD];
+        return {
+            cardsList: [...cardsList, FORCED_CARD_PIDGEY],
+            prePickedCard: FORCED_CARD_PIDGEY,
+        }
+    }
+
+    const cardsList = A1A_CARDS.sort(() => Math.random() - 0.5).slice(0, 5);
+    const prePickedCard = cardsList[Math.floor(Math.random() * cardsList.length)];
+
+    return {
+        cardsList,
+        prePickedCard,
+    };
 }
 

@@ -1,13 +1,18 @@
 import { useMemo, useState } from 'react'
 import './styles/animations.css'
 import './styles/App.css'
-import { getInitialCards, FORCED_CARD } from './utils/initial-cards';
+import { getInitialCards } from './utils/initial-cards';
+
+
+const FORCE_PIDGEY = true;
 
 function App() {
   const [game, setGame] = useState<number>(0);
-  const initialCards = getInitialCards();
+  const { cardsList, prePickedCard } = getInitialCards(FORCE_PIDGEY);
+  console.log('prePickedCard', prePickedCard);
+  const [forcedCard, setForcedCard] = useState<string>(prePickedCard);
   const randomCardsList = useMemo(
-    () => initialCards.sort(() => 0.5 - Math.random()),
+    () => cardsList.sort(() => 0.5 - Math.random()),
     []
   );
   const [cards, setCards] = useState(randomCardsList);
@@ -33,8 +38,10 @@ function App() {
 
   const resetGame = () => {
     setGame(game + 1);
-    const initialCards = getInitialCards();
-    setCards(initialCards);
+    const { cardsList, prePickedCard } = getInitialCards(FORCE_PIDGEY);
+    setCards(cardsList);
+    setForcedCard(prePickedCard);
+    console.log('prePickedCard', prePickedCard);
     setSelectedCard(null);
     setGameState('');
   }
@@ -49,16 +56,16 @@ function App() {
       const frontList = cardItem.getElementsByClassName('front');
       if (frontList && frontList.length > 0) {
         const front = frontList[0] as HTMLDivElement;
-        front.style.backgroundImage = `url(${FORCED_CARD})`;
+        front.style.backgroundImage = `url(${forcedCard})`;
       }
       cardItem.className += ' picked';
       setSelectedCard(url);
       setTimeout(() => {
         setCards(cards.map((cardUrl, i) => {
           if (i === index) {
-            return FORCED_CARD;
+            return forcedCard;
           }
-          if (cardUrl === FORCED_CARD && url !== FORCED_CARD) {
+          if (cardUrl === forcedCard && url !== forcedCard) {
             return url;
           }
           return cardUrl;

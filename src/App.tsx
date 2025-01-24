@@ -95,6 +95,9 @@ function App() {
             </div>
           </div>
         ))}
+        <div className='mask'>
+          <img src="/game-mask.webp" alt="" />
+        </div>
       </div>
       <div className='content-actions'>
         {gameState === '' && (

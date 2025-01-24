@@ -11,19 +11,33 @@ html, body {
 
 .content-cards {
   position: relative;
-  width: 724px;
-  height: 650px;
+  max-width: 724px;
   margin: 0 auto;
   perspective: 2000px;
   transform-style: preserve-3d;
 }
 
+.content-cards .mask {
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.content-cards .mask img {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+
 .card {
+  z-index: 2;
   position: absolute;
   background-color: transparent;
   flex: 0 0 30%;
-  width: 220px;
-  height: 307px;
+  width: 30.4%;
+  height: 47.24%;
   perspective: 1000px;
   transition: all 0.8s;
 }
@@ -35,22 +49,22 @@ html, body {
 
 .content-cards .card:nth-child(2) {
   top: 0;
-  left: 252px;
+  left: 34.8%;
 }
 
 .content-cards .card:nth-child(3) {
   top: 0;
-  left: 504px;
+  left: 69.6%;
 }
 
 .content-cards .card:nth-child(4) {
-  top: 339px;
-  left: 126px;
+  top: 52.15%;
+  left: 17.4%;
 }
 
 .content-cards .card:nth-child(5) {
-  top: 339px;
-  left: 378px;
+  top: 52.15%;
+  left: 52.2%;
 }
 
 .card .card-inner {

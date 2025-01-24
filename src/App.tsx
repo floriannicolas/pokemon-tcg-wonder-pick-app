@@ -92,6 +92,9 @@ function App() {
 
   return (
     <>
+      <div className='content-logo'>
+        <img src="/logo.webp" alt="" />
+      </div>
       <div className={`content-cards ${gameState}`}>
         {cards.map((card, index) => (
           <div
@@ -114,10 +117,10 @@ function App() {
       </div>
       <div className='content-actions'>
         {gameState === '' && (
-          <button onClick={launchWonderPick}>Launch Wonder Pick</button>
+          <button onClick={launchWonderPick}>Start Wonder Pick</button>
         )}
         {gameState === 'end' && (
-          <button onClick={resetGame}>Reset</button>
+          <button onClick={resetGame}>New Pick</button>
         )}
       </div>
     </>

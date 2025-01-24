@@ -9,9 +9,21 @@ html, body {
   text-align: center;
 }
 
+.content-logo {
+  position: relative;
+  max-width: 180px;
+  margin: 0 auto 32px;
+}
+
+.content-logo img {
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+
 .content-cards {
   position: relative;
-  max-width: 724px;
+  max-width: 560px;
   margin: 0 auto;
   perspective: 2000px;
   transform-style: preserve-3d;
@@ -174,7 +186,7 @@ html, body {
   animation-fill-mode: forwards;
 }
 
-.card.picked.new {
+.card.picked {
   filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.7));
 }
 

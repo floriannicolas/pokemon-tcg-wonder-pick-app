@@ -237,3 +237,73 @@ html, body {
 .content-actions {
   margin-top: 32px;
 }
+
+.content-cards.rotate .card {
+  --ellipse-width: 300px;
+  --ellipse-height: 200px;
+  --tilt-angle: -15deg;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  animation: rotate-spread 1s linear infinite;
+}
+
+@keyframes rotate-spread {
+  0% {
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--tilt-angle))
+      translate(
+        calc(var(--ellipse-width) * cos(var(--angle))),
+        calc(var(--ellipse-height) * sin(var(--angle)))
+      );
+    z-index: calc(5 + sin(var(--angle)));
+  }
+  25% {
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--tilt-angle))
+      translate(
+        calc(var(--ellipse-width) * cos(calc(var(--angle) + 90deg))),
+        calc(var(--ellipse-height) * sin(calc(var(--angle) + 90deg)))
+      );
+    z-index: calc(5 + sin(calc(var(--angle) + 90deg)));
+  }
+  50% {
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--tilt-angle))
+      translate(
+        calc(var(--ellipse-width) * cos(calc(var(--angle) + 180deg))),
+        calc(var(--ellipse-height) * sin(calc(var(--angle) + 180deg)))
+      );
+    z-index: calc(5 + sin(calc(var(--angle) + 180deg)));
+  }
+  75% {
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--tilt-angle))
+      translate(
+        calc(var(--ellipse-width) * cos(calc(var(--angle) + 270deg))),
+        calc(var(--ellipse-height) * sin(calc(var(--angle) + 270deg)))
+      );
+    z-index: calc(5 + sin(calc(var(--angle) + 270deg)));
+  }
+  100% {
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--tilt-angle))
+      translate(
+        calc(var(--ellipse-width) * cos(calc(var(--angle) + 360deg))),
+        calc(var(--ellipse-height) * sin(calc(var(--angle) + 360deg)))
+      );
+    z-index: calc(5 + sin(calc(var(--angle) + 360deg)));
+  }
+}
+
+/* Keep existing spread card angles */
+.content-cards.rotate .card:nth-child(1) { --angle: 222deg; }
+.content-cards.rotate .card:nth-child(2) { --angle: 294deg; }
+.content-cards.rotate .card:nth-child(3) { --angle: 6deg; }
+.content-cards.rotate .card:nth-child(4) { --angle: 78deg; }
+.content-cards.rotate .card:nth-child(5) { --angle: 150deg; }

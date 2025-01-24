@@ -28,9 +28,9 @@ function App() {
       setGameState('flipped centered');
       setTimeout(() => {
         setGameState('flipped centered spread');
-        // setTimeout(() => {
-        //   setGameState('flipped centered spread shuffle');
-        // }, 1000)
+        setTimeout(() => {
+          setGameState('flipped centered spread rotate');
+        }, 1000)
         // setTimeout(() => {
         //   setGameState('flipped selectable');
         // }, 1600);

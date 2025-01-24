@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import './App.css'
 
 const initialCardsList = [
@@ -10,29 +10,30 @@ const initialCardsList = [
 ];
 
 const forcedCard = '/cards/pidgey.webp';
-const getRandomCardsList = (array: string[]) => {
+const getRandomCardsList = (array: string[], game: number) => {
   for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(Math.random() * (game/100) * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
 };
 
 function App() {
-  const [cards, setCards] = useState(getRandomCardsList(initialCardsList));
-  const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [game, setGame] = useState<number>(0);
+  const randomCardsList = useMemo(
+    () => getRandomCardsList(initialCardsList, game),
+    [game]
+  );
+  const [cards, setCards] = useState(randomCardsList);
+  const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [gameState, setGameState] = useState('');
 
   const launchWonderPick = () => {
     setGameState('flipped');
-
     setTimeout(() => {
       setGameState('flipped centered');
-
       setTimeout(() => {
         setGameState('flipped centered shuffled');
-
         setTimeout(() => {
           setGameState('flipped selectable');
         }, 1200);
@@ -41,10 +42,10 @@ function App() {
   }
 
   const resetGame = () => {
-    setCards(getRandomCardsList(initialCardsList));
+    setGame(game + 1);
+    setCards(randomCardsList);
     setSelectedCard(null);
     setGameState('');
-    setGame(game + 1);
   }
 
   const selectCard = (index: number, url: string) => {

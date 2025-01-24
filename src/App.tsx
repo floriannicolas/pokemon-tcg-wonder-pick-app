@@ -4,7 +4,7 @@ import './styles/App.css'
 import { getInitialCards } from './utils/initial-cards';
 
 
-const FORCE_PIDGEY = true;
+const FORCE_PIDGEY = false;
 
 function App() {
   const [game, setGame] = useState<number>(0);
@@ -25,7 +25,7 @@ function App() {
       setCards(cards.sort(() => 0.5 - Math.random()));
       setGameState('flipped centered');
       setTimeout(() => {
-        setGameState('flipped centered shuffled');       
+        setGameState('flipped centered shuffled');
         setTimeout(() => {
           setGameState('flipped');
           setTimeout(() => {
@@ -53,14 +53,29 @@ function App() {
 
     const cardItem = document.getElementById(`card-${game}-${index}`);
     if (cardItem) {
+      const starsContainer = document.createElement('div');
+      starsContainer.className = 'stars-container';
+
+      for (let i = 0; i < 6; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animation = `star-twinkle 0.6s ease-out ${i * 0.1}s forwards`;
+        starsContainer.appendChild(star);
+      }
+
+      cardItem.appendChild(starsContainer);
+
       const frontList = cardItem.getElementsByClassName('front');
       if (frontList && frontList.length > 0) {
         const front = frontList[0] as HTMLDivElement;
         front.style.backgroundImage = `url(${forcedCard})`;
       }
-      cardItem.className += ' picked';
+      cardItem.className += ' picked new';
       setSelectedCard(url);
       setTimeout(() => {
+        cardItem.className = 'card picked'
         setCards(cards.map((cardUrl, i) => {
           if (i === index) {
             return forcedCard;
@@ -73,13 +88,13 @@ function App() {
         setTimeout(() => {
           setGameState('end');
         }, 300);
-      }, 1000);
+      }, 1400);
     }
   }
 
   return (
     <>
-      <div className={`content-cards ${gameState}`}>  
+      <div className={`content-cards ${gameState}`}>
         {cards.map((url, index) => (
           <div
             id={`card-${game}-${index}`}

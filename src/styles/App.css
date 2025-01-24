@@ -106,7 +106,7 @@ html, body {
 .content-cards.flipped .card:nth-child(2) .card-inner {
   animation-delay: .3s;
 }
- 
+
 .content-cards.flipped .card:nth-child(3) .card-inner {
   animation-delay: .6s
 }
@@ -117,7 +117,7 @@ html, body {
 
 .content-cards.flipped .card:nth-child(5) .card-inner {
   animation-delay: 1.2s;
-} 
+}
 
 .content-cards.centered .card {
   position: absolute;
@@ -139,7 +139,7 @@ html, body {
 .content-cards.shuffled .card:nth-child(2) {
   animation-name: shuffled-card-2;
 }
- 
+
 .content-cards.shuffled .card:nth-child(3) {
   animation-name: shuffled-card-3;
 }
@@ -150,10 +150,16 @@ html, body {
 
 .content-cards.shuffled .card:nth-child(5) {
   animation-name: shuffled-card-5;
-} 
+}
 
 .content-cards.selectable .card {
   cursor: pointer;
+}
+
+.content-cards.selectable .card.picked {
+  animation: animation-pick-card;
+  animation-duration: 0.4s;
+  animation-fill-mode: forwards;
 }
 
 .content-cards.selectable .card.picked .card-inner {
@@ -161,10 +167,43 @@ html, body {
   animation-duration: 0.8s;
   animation-fill-mode: forwards;
 }
+
 .content-cards.end .card .card-inner {
   animation: animation-rotate-back;
   animation-duration: 0.8s;
   animation-fill-mode: forwards;
+}
+
+.card.picked.new {
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.7));
+}
+
+.card.picked.new .card-inner::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border: 2px solid transparent;
+  border-radius: 15px;
+  background: linear-gradient(45deg, #ffd700, #ffa500, #ffd700) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  animation: border-shine 1s linear infinite;
+}
+
+.card.picked .stars-container {
+  position: absolute;
+  inset: -20px;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: radial-gradient(circle, #fff 0%, #ffd700 50%, transparent 100%);
+  ;
+  clip-path: polygon(50% 0%, 62.13% 37.88%, 100% 50%, 62.13% 58.88%, 50% 100%, 37.88% 58.88%, 0% 50%, 37.88% 37.88%);
+  filter: blur(1px) brightness(1.5);
 }
 
 .content-actions {
@@ -182,10 +221,11 @@ html, body {
   transition: all 0.3s ease;
   user-select: none;
 }
+
 .content-actions button:hover {
   background-color: #37e6d5;
 }
+
 .content-actions button:focus {
   outline: 0;
 }
-

@@ -32,8 +32,8 @@ function App() {
             setGameState('flipped selectable');
           }, 800);
         }, 1600);
-      }, 1400);
-    }, 2000);
+      }, 800);
+    }, 1800);
   }
 
   const resetGame = () => {

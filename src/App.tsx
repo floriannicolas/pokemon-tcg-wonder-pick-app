@@ -1,20 +1,12 @@
 import { useMemo, useState } from 'react'
 import './App.css'
-
-const initialCardsList = [
-  '/cards/blue.webp',
-  '/cards/gyarados-ex.webp',
-  '/cards/mew-ex-gold.webp',
-  '/cards/mew-ex.webp',
-  '/cards/pidgey.webp',
-];
-
-const forcedCard = '/cards/pidgey.webp';
+import { getInitialCards, FORCED_CARD } from './utils/initial-cards';
 
 function App() {
   const [game, setGame] = useState<number>(0);
+  const initialCards = getInitialCards();
   const randomCardsList = useMemo(
-    () => initialCardsList.sort((a, b) => 0.5 - Math.random()),
+    () => initialCards.sort((a, b) => 0.5 - Math.random()),
     []
   );
   const [cards, setCards] = useState(randomCardsList);
@@ -37,7 +29,8 @@ function App() {
 
   const resetGame = () => {
     setGame(game + 1);
-    setCards(cards.sort((a, b) => 0.5 - Math.random()));
+    const initialCards = getInitialCards();
+    setCards(initialCards);
     setSelectedCard(null);
     setGameState('');
   }
@@ -52,16 +45,16 @@ function App() {
       const frontList = cardItem.getElementsByClassName('front');
       if (frontList && frontList.length > 0) {
         const front = frontList[0] as HTMLDivElement;
-        front.style.backgroundImage = `url(${forcedCard})`;
+        front.style.backgroundImage = `url(${FORCED_CARD})`;
       }
       cardItem.className += ' picked';
       setSelectedCard(url);
       setTimeout(() => {
         setCards(cards.map((cardUrl, i) => {
           if (i === index) {
-            return forcedCard;
+            return FORCED_CARD;
           }
-          if (cardUrl === forcedCard && url !== forcedCard) {
+          if (cardUrl === FORCED_CARD && url !== FORCED_CARD) {
             return url;
           }
           return cardUrl;

@@ -21,16 +21,16 @@ function App() {
   const [gameState, setGameState] = useState('');
 
   const launchWonderPick = async () => {
-    setGameState('flipped');
+    setGameState('started flipped animation-state-1');
     await delay(1800);
     setCards(cards.sort(() => 0.5 - Math.random()));
-    setGameState('flipped centered');
+    setGameState('started flipped centered');
     await delay(800);
-    setGameState('flipped centered shuffled');
-    await delay(1600);
-    setGameState('flipped');
+    setGameState('started flipped centered shuffled');
+    await delay(1800);
+    setGameState('started flipped');
     await delay(800);
-    setGameState('flipped selectable');
+    setGameState('started flipped selectable');
   }
 
   const resetGame = () => {
@@ -92,8 +92,15 @@ function App() {
 
   return (
     <>
-      <div className='content-logo'>
+      <div className='background-top' />
+      <div className='background-bottom' />
+      <div className={`content-logo ${gameState}`}>
         <img src="/logo.webp" alt="" />
+        <div className='title pick'>
+          <div className='icon-booster' />
+          Wonder picking this booster pack!
+        </div>
+        <div className='title pick-select'>Pick a card</div>
       </div>
       <div className={`content-cards ${gameState}`}>
         {cards.map((card, index) => (
@@ -109,6 +116,7 @@ function App() {
               <div className="front" style={{ backgroundImage: `url(${card})` }} />
               <div className="back" style={{ backgroundImage: 'url(/cards/back.webp)' }} />
             </div>
+            <div className='popup-picked'>Picked!</div>
           </div>
         ))}
         <div className='mask'>

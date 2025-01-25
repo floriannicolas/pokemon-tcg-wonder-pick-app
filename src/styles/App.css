@@ -1,5 +1,5 @@
 html, body {
-  background-color: #E8F0F8;
+  background-color: hsl(206, 47%, 94%);
 }
 
 #root {
@@ -9,17 +9,92 @@ html, body {
   text-align: center;
 }
 
+.background-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 25vh;
+  background-color: hsl(212, 49%, 92%);
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 100%);
+}
+
+.background-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 25vh;
+  background-color: hsl(212, 49%, 91%);
+  clip-path: polygon(0 20%, 100% 0, 100% 100%, 0% 100%);
+}
+
 .content-logo {
   position: relative;
-  max-width: 180px;
   margin: 0 auto 32px;
+  transition: all 0.6s ease;
+  text-align: center;
+  min-height: 88px;
+}
+
+.content-logo.started img {
+  display: none;
 }
 
 .content-logo img {
   display: block;
   width: 100%;
-  margin: 0;
+  max-width: 180px;
+  margin: 0 auto;
 }
+
+.content-logo.started img {
+  display: none;
+}
+
+.content-logo .title {
+  display: inline-block;
+  padding: 8px 32px;
+  line-height: 40px;
+  box-sizing: border-box;
+  font-weight: 300;
+  border: none;
+  background-color: #F2F8FC;
+  color: #878D96;
+  border-radius: 28px;
+  transition: all 0.3s ease;
+  user-select: none;
+  box-shadow: 0px 0px 11px 0px #d7d8dc;
+  display: none;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.content-logo .title.pick {
+  padding-left: 80px;
+}
+
+.content-logo .title.title.pick-select {
+  padding-inline: 88px;
+}
+
+.content-logo.animation-state-1 .title.pick,
+.content-logo.selectable .title.pick-select {
+  display: inline-block;
+}
+
+.content-logo .title.pick .icon-booster {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  width: 41px;
+  height: 80px;
+  background-image: url('../../public/booster-a1a.webp');
+  background-size: 41px 80px;
+  background-repeat: no-repeat;
+  transform: rotate(10deg);
+}
+
 
 .content-cards {
   position: relative;
@@ -105,6 +180,24 @@ html, body {
   transform: rotateY(180deg);
 }
 
+.card .popup-picked {
+  padding: 0.2rem 0.5rem;
+  box-sizing: border-box;
+  font-weight: 700;
+  border: none;
+  background: rgb(2,0,36);
+  background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(58,192,179,1) 0%, rgba(0,212,255,1) 100%);
+  color: #fff;
+  border-radius: 23px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
 .content-cards.flipped .card .card-inner {
   animation: animation-rotate;
   animation-duration: 0.8s;
@@ -186,8 +279,13 @@ html, body {
   animation-fill-mode: forwards;
 }
 
-.card.picked {
+.card.picked.new {
   filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.7));
+}
+
+.card.picked:not(.new) .popup-picked {
+  opacity: 1;
+  display: block;
 }
 
 .card.picked.new .card-inner::before {
@@ -220,14 +318,17 @@ html, body {
 
 .content-actions {
   margin-top: 32px;
+  position: relative;
 }
 
 .content-actions button {
   padding: 8px 32px;
   height: 46px;
   box-sizing: border-box;
+  font-weight: 300;
   border: none;
-  background-color: #3AC0B3;
+  background: rgb(2,0,36);
+  background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(58,192,179,1) 0%, rgba(0,212,255,1) 100%);
   color: #fff;
   border-radius: 23px;
   transition: all 0.3s ease;
@@ -235,7 +336,8 @@ html, body {
 }
 
 .content-actions button:hover {
-  background-color: #37e6d5;
+  background: rgb(2,0,36);
+background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(55,230,213,1) 0%, rgba(0,212,255,1) 100%);
 }
 
 .content-actions button:focus {

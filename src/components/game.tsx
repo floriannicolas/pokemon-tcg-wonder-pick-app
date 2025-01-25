@@ -97,7 +97,7 @@ export default function Game() {
             <div className="absolute top-0 left-0 w-full h-[25vh] bg-[#e0eaf5] [clip-path:polygon(0_0,100%_0,100%_80%,0%_100%)]" />
             <div className="absolute bottom-0 left-0 w-full h-[25vh] bg-[#dde7f3] [clip-path:polygon(0_20%,100%_0,100%_100%,0%_100%)]" />
             <div className={`group relative mx-auto mb-8 transition-all duration-600 ease-in-out text-center min-h-[88px] ${gameState}`}>
-                <img src="/logo.webp" alt="" className="block w-full max-w-[180px] mx-auto group-[.started]:hidden" />
+                <img src="/logo.webp" alt="" className="block w-full max-w-[180px] mx-auto group-[.started]:hidden group-[.end]:hidden" />
 
                 <div className="hidden opacity-0 px-8 py-2.5 leading-10 font-light bg-[#F2F8FC] text-[#878D96] rounded-[28px] shadow-[0_0_11px_0_#d7d8dc] relative mb-8 text-base transition-all duration-300 ease-in-out pl-20 data-[visible=true]:inline-block data-[visible=true]:opacity-100 group-[.animation-state-1]:inline-block group-[.animation-state-1]:opacity-100 max-422:text-[0.78rem]">
                     <div className="absolute top-0 left-5 w-[41px] h-20 bg-[url('/booster-a1a.webp')] bg-[length:41px_80px] bg-no-repeat transform -translate-y-[12%] rotate-[10deg]" />
@@ -106,6 +106,10 @@ export default function Game() {
 
                 <div className="hidden opacity-0 py-2.5 leading-10 font-light bg-[#F2F8FC] text-[#878D96] rounded-[28px] shadow-[0_0_11px_0_#d7d8dc] relative mb-8 text-base transition-all duration-300 ease-in-out px-20 data-[visible=true]:inline-block data-[visible=true]:opacity-100 group-[.selectable]:inline-block group-[.selectable]:opacity-100">
                     Pick a card
+                </div>
+
+                <div className="hidden opacity-0 py-2.5 leading-10 font-light bg-[#F2F8FC] text-[#878D96] rounded-[28px] shadow-[0_0_11px_0_#d7d8dc] relative mb-8 text-base transition-all duration-300 ease-in-out px-20 data-[visible=true]:inline-block data-[visible=true]:opacity-100 group-[.end]:inline-block group-[.end]:opacity-100">
+                    Wonder pick result:
                 </div>
             </div>
             <div className={`content-cards ${gameState}`}>

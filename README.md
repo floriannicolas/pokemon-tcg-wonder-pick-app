@@ -47,9 +47,11 @@ src/
 │   └── page.tsx
 ├── components/
 │   └── game.tsx
+│   └── preferences.tsx
 └── utils/
-    └── initial-cards.ts
+    └── cards.ts
     └── delay.ts
+    └── wonder-pick.ts
 ```
 
 ## Contributing

@@ -85,7 +85,7 @@ export default function Preferences({
                                 name="booster"
                                 render={({ field }) => (
                                     <FormItem className="space-y-3">
-                                        <FormLabel>Booster type</FormLabel>
+                                        <FormLabel>Booster type:</FormLabel>
                                         <FormControl>
                                             <RadioGroup
                                                 onValueChange={field.onChange}
@@ -104,32 +104,36 @@ export default function Preferences({
                                                     <FormControl>
                                                         <RadioGroupItem value={Booster.A1_CHARIZARD} />
                                                     </FormControl>
-                                                    <FormLabel className="font-normal">
-                                                        A1 - Charizard
+                                                    <FormLabel className="font-normal flex gap-2 items-center">
+                                                        <div className="h-8 w-4 bg-contain bg-no-repeat" style={{ backgroundImage: `url('/boosters/${Booster.A1_CHARIZARD}.webp')` }} />
+                                                        <span className="font-bold">A1</span> - Charizard
                                                     </FormLabel>
                                                 </FormItem>
                                                 <FormItem className="flex items-center space-x-3 space-y-0">
                                                     <FormControl>
                                                         <RadioGroupItem value={Booster.A1_MEWTWO} />
                                                     </FormControl>
-                                                    <FormLabel className="font-normal">
-                                                        A1 - Mewtwo
+                                                    <FormLabel className="font-normal flex gap-2 items-center">
+                                                        <div className="h-8 w-4 bg-contain bg-no-repeat" style={{ backgroundImage: `url('/boosters/${Booster.A1_MEWTWO}.webp')` }} />
+                                                        <span className="font-bold">A1</span> - Mewtwo
                                                     </FormLabel>
                                                 </FormItem>
                                                 <FormItem className="flex items-center space-x-3 space-y-0">
                                                     <FormControl>
                                                         <RadioGroupItem value={Booster.A1_PIKACHU} />
                                                     </FormControl>
-                                                    <FormLabel className="font-normal">
-                                                        A1 - Pikachu
+                                                    <FormLabel className="font-normal flex gap-2 items-center">
+                                                        <div className="h-8 w-4 bg-contain bg-no-repeat" style={{ backgroundImage: `url('/boosters/${Booster.A1_PIKACHU}.webp')` }} />
+                                                        <span className="font-bold">A1</span> - Pikachu
                                                     </FormLabel>
                                                 </FormItem>
                                                 <FormItem className="flex items-center space-x-3 space-y-0">
                                                     <FormControl>
                                                         <RadioGroupItem value={Booster.A1A_MEW} />
                                                     </FormControl>
-                                                    <FormLabel className="font-normal">
-                                                        A1A - Mew
+                                                    <FormLabel className="font-normal flex gap-2 items-center">
+                                                        <div className="h-8 w-4 bg-contain bg-no-repeat" style={{ backgroundImage: `url('/boosters/${Booster.A1A_MEW}.webp')` }} />
+                                                        <span className="font-bold">A1A</span> - Mew
                                                     </FormLabel>
                                                 </FormItem>
 

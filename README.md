@@ -54,16 +54,6 @@ src/
 ## Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-- Pokémon TCG for inspiration
-- Next.js team for the amazing framework
-- The Pokémon Company for the card designs
-## Disclaimer
-This is a fan-made project and is not affiliated with, sponsored, or endorsed by Nintendo, The Pokémon Company, or Game Freak.
-
 ```
 Would you like me to:
 1. Add more technical details about specific features?
@@ -71,3 +61,15 @@ Would you like me to:
 3. Add a development roadmap section?
 4. Include screenshots or GIFs of the application?
 ```
+
+## License
+
+[GPL License](https://www.gnu.org/licenses/gpl-3.0.html)
+
+## Acknowledgments
+- Pokémon TCG for inspiration
+- Next.js team for the amazing framework
+- The Pokémon Company for the card designs
+
+## Disclaimer
+This is a fan-made project and is not affiliated with, sponsored, or endorsed by Nintendo, The Pokémon Company, or Game Freak.

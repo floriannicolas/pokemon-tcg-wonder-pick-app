@@ -12,7 +12,8 @@ An interactive web application that simulates the Pokémon Trading Card Game's W
 
 ## Tech Stack
 
-- Next.js 14
+- React 19
+- Nextjs 15
 - TypeScript
 - Tailwind CSS
 - CSS Animations

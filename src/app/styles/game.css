@@ -65,6 +65,7 @@
 }
 
 .card .card-inner .back {
+  background-image: url('/cards/back.webp');
   transform: rotateY(180deg);
 }
 

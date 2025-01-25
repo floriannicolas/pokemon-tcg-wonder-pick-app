@@ -2,7 +2,7 @@
 
 import "@/app/styles/animations.css";
 import "@/app/styles/game.css";
-import { useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getInitialCards } from '@/utils/initial-cards';
 import { delay } from '@/utils/delay';
 
@@ -10,16 +10,17 @@ const FORCE_PIDGEY = false;
 
 export default function Game() {
     const [game, setGame] = useState<number>(0);
-    const { cardsList, prePickedCard } = getInitialCards(FORCE_PIDGEY);
-    console.log('prePickedCard', prePickedCard);
-    const [forcedCard, setForcedCard] = useState<string>(prePickedCard);
-    const randomCardsList = useMemo(
-        () => cardsList.sort(() => 0.5 - Math.random()),
-        []
-    );
-    const [cards, setCards] = useState(randomCardsList);
+    const [forcedCard, setForcedCard] = useState<string>('');
+    const [cards, setCards] = useState<string[]>([]);
     const [selectedCard, setSelectedCard] = useState<string | null>(null);
     const [gameState, setGameState] = useState('');
+
+    useEffect(() => {
+        const { cardsList, prePickedCard } = getInitialCards(FORCE_PIDGEY);
+        console.log('prePickedCard', prePickedCard);
+        setCards(cardsList);
+        setForcedCard(prePickedCard);
+    }, []);
 
     const launchWonderPick = async () => {
         setGameState('started flipped animation-state-1');
@@ -118,8 +119,8 @@ export default function Game() {
                         }}
                     >
                         <div className="card-inner">
-                            <div className="front" style={{ backgroundImage: `url(${card})` }} />
-                            <div className="back" style={{ backgroundImage: 'url(/cards/back.webp)' }} />
+                            <div className="front" style={{ backgroundImage: `url("${card}")` }} />
+                            <div className="back" />
                         </div>
                         <div className='popup-picked'>Picked!</div>
                     </div>

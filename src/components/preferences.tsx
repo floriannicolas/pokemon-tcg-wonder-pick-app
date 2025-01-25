@@ -30,13 +30,13 @@ import { z } from "zod";
 import { Booster } from "@/lib/definitions";
 import { Menu } from "lucide-react";
 
+
+const BoosterValues = Object.values(Booster);
+
 const PreferencesFormSchema = z.object({
     booster: z.enum([
-        "random",
-        Booster.A1_CHARIZARD,
-        Booster.A1_MEWTWO,
-        Booster.A1_PIKACHU,
-        Booster.A1A_MEW,
+        'random',
+        ...BoosterValues,
     ], {
         required_error: "You need to select a booster type.",
     }),
@@ -97,7 +97,7 @@ export default function Preferences({
                                                         <RadioGroupItem value="random" />
                                                     </FormControl>
                                                     <FormLabel className="font-normal">
-                                                        Random booster
+                                                        Random
                                                     </FormLabel>
                                                 </FormItem>
                                                 <FormItem className="flex items-center space-x-3 space-y-0">

@@ -5,7 +5,7 @@ import "@/app/styles/game.css";
 import { useEffect, useState } from 'react';
 import { delay } from '@/utils/delay';
 import { Booster, Card } from "@/lib/definitions";
-import { generateWonderPick } from "@/utils/wonder-pick-algorithm";
+import { generateWonderPick } from "@/utils/wonder-pick";
 import Preferences, { PREFERENCES_BOOSTER_KEY } from "./preferences";
 import { useLocalStorage } from "usehooks-ts";
 

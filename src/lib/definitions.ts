@@ -26,4 +26,5 @@ export type WonderPickResponse = {
     cardsList: Card[];
     prePickedCard: Card;
     boosterType: Booster;
+    seed?: string;
 }

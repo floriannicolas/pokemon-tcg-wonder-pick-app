@@ -8,6 +8,13 @@ const BoostersList = [
     Booster.A1_PIKACHU,
 ];
 
+const BoostersListSeedReference = {
+    [Booster.A1A_MEW]: 'A1AM',
+    [Booster.A1_CHARIZARD]: 'A1C',
+    [Booster.A1_MEWTWO]: 'A1M',
+    [Booster.A1_PIKACHU]: 'A1P',
+}
+
 /**
  * Get booster cards list using true probabilities.
  *
@@ -143,10 +150,109 @@ export const generateWonderPick = (
         ? prePickedCardPidgey
         : cardsList[Math.floor(Math.random() * cardsList.length)];
 
+    const seed = getWonderPickSeed( {
+        cardsList,
+        prePickedCard,
+        boosterType,
+    });
+
+    console.log('Wonder Pick :: ', `${process.env.NEXT_PUBLIC_WEBSITE_URL}/wonder-pick/${seed}`);
+
     return {
         cardsList,
         prePickedCard,
         boosterType,
+        seed,
     };
 }
 
+/**
+ * Generate a unique string seed from a WonderPickResponse.
+ *
+ * @param cardsList 
+ * @param prePickedCard 
+ * @param boosterType 
+ */
+export const getWonderPickSeed = (
+    wonderPickResponse: WonderPickResponse,
+) : string => {
+    const { cardsList, prePickedCard, boosterType } = wonderPickResponse;
+    const boosterTypeSeed = BoostersListSeedReference[boosterType];
+
+    const allCards = ALL_CARDS[boosterType];
+    const padMax = allCards.length.toString().length;
+    const cardsIdentifiers = [];
+    let prePickedIdentifier = '';
+
+    for (let i = 0; i < cardsList.length; i++) {
+        const card = cardsList[i];
+        const cardIndex = allCards.findIndex((c) => c.image === card.image);
+        const cardIdentifier = cardIndex.toString().padStart(padMax, '0');
+        cardsIdentifiers.push(cardIdentifier);
+        if (prePickedCard.image === card.image) {
+            prePickedIdentifier = cardIdentifier;
+        }
+    }
+    
+    return `${boosterTypeSeed}-${cardsIdentifiers.join('')}-${prePickedIdentifier}`;
+}
+
+/**
+ * Get a WonderPickResponse from a seed.
+ *
+ * @param seed
+ * 
+ * @returns WonderPickResponse
+ */
+export const getWonderPickResponseFromSeed = (
+    seed: string,
+) : WonderPickResponse => {
+    const seedSplit = seed.split('-');
+    const boosterTypeSeed = seedSplit[0];
+    const boosterType = Object.keys(BoostersListSeedReference)
+        .find((key) => BoostersListSeedReference[key as keyof typeof BoostersListSeedReference] === boosterTypeSeed) as Booster;
+
+    if (!boosterType) {
+        throw new Error('Wrong seed: no boosterType found');
+    }
+    const allCards = ALL_CARDS[boosterType];
+    if (!allCards) {
+        throw new Error('Wrong seed: no cards found');
+    }
+    const cardsIdentifiers = seedSplit[1];
+    if (!cardsIdentifiers) {
+        throw new Error('Wrong seed: no cardsIdentifiers found');
+    }
+    const cardsList: Card[] = [];
+    const keyLength = cardsIdentifiers.length / 5;
+    for (let i = 0; i < cardsIdentifiers.length; i += keyLength) {
+        const cardIndex = parseInt(cardsIdentifiers.substring(i, i + keyLength));
+        const card = allCards[cardIndex];
+        if (!card) {
+            throw new Error('Wrong seed: no card found in cardList');
+        }
+        cardsList.push(card);
+    }
+
+    if (cardsList.length !== 5) {
+        throw new Error('Wrong seed: no cardsList found');
+    }
+    const prePickedCardIndex = parseInt(seedSplit[2]);
+    const prePickedCard = allCards[prePickedCardIndex];
+    if (!prePickedCard) {
+        throw new Error('Wrong seed: no prePickedCard found');
+    }
+
+    const isPrePickedCardInCardList = cardsList.find((card) => card.image === prePickedCard.image);
+    if (!isPrePickedCardInCardList) {
+        throw new Error('Wrong seed: prePickedCard not in cardList');
+    }
+
+    console.log('Wonder Pick :: ', `${process.env.NEXT_PUBLIC_WEBSITE_URL}/wonder-pick/${seed}`);
+
+    return {
+        cardsList,
+        boosterType,
+        prePickedCard,
+    };
+}

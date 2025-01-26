@@ -4,12 +4,16 @@ import "@/app/styles/animations.css";
 import "@/app/styles/game.css";
 import { useEffect, useState } from 'react';
 import { delay } from '@/utils/delay';
-import { Booster, Card } from "@/lib/definitions";
+import { Booster, Card, WonderPickResponse } from "@/lib/definitions";
 import { generateWonderPick } from "@/utils/wonder-pick";
 import Preferences, { PREFERENCES_WONDER_PICK_BOOSTER_KEY, PREFERENCES_WONDER_PICK_ONLY_GOD_PACK_KEY } from "./preferences";
 import { useLocalStorage } from "usehooks-ts";
 
-export default function Game() {
+export default function Game({
+    seedResponse,
+}: {
+    seedResponse: WonderPickResponse | undefined,
+}) {
     const [game, setGame] = useState<number>(0);
     const [preferredBooster] = useLocalStorage<Booster | 'random'>(PREFERENCES_WONDER_PICK_BOOSTER_KEY, 'random');
     const [onlyGodPack] = useLocalStorage<boolean>(PREFERENCES_WONDER_PICK_ONLY_GOD_PACK_KEY, false);
@@ -20,7 +24,9 @@ export default function Game() {
     const [gameState, setGameState] = useState('');
 
     useEffect(() => {
-        const { cardsList, prePickedCard, boosterType } = generateWonderPick(preferredBooster, onlyGodPack);
+        const { cardsList, prePickedCard, boosterType } = (seedResponse !== undefined)
+            ? seedResponse
+            : generateWonderPick(preferredBooster, onlyGodPack);
         setCards(cardsList);
         setForcedCard(prePickedCard);
         setSelectedBoosterType(boosterType);

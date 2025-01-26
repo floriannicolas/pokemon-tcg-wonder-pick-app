@@ -12,7 +12,7 @@ import { useLocalStorage } from "usehooks-ts";
 export default function Game({
     seedResponse,
 }: {
-    seedResponse: WonderPickResponse | undefined,
+    seedResponse?: WonderPickResponse,
 }) {
     const [game, setGame] = useState<number>(0);
     const [preferredBooster] = useLocalStorage<Booster | 'random'>(PREFERENCES_WONDER_PICK_BOOSTER_KEY, 'random');

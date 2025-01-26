@@ -6,23 +6,24 @@ import { useEffect, useState } from 'react';
 import { delay } from '@/utils/delay';
 import { Booster, Card } from "@/lib/definitions";
 import { generateWonderPick } from "@/utils/wonder-pick";
-import Preferences, { PREFERENCES_BOOSTER_KEY } from "./preferences";
+import Preferences, { PREFERENCES_WONDER_PICK_BOOSTER_KEY, PREFERENCES_WONDER_PICK_ONLY_GOD_PACK_KEY } from "./preferences";
 import { useLocalStorage } from "usehooks-ts";
 
 export default function Game() {
     const [game, setGame] = useState<number>(0);
-    const [preferredBooster] = useLocalStorage<Booster | 'random'>(PREFERENCES_BOOSTER_KEY, 'random');
+    const [preferredBooster] = useLocalStorage<Booster | 'random'>(PREFERENCES_WONDER_PICK_BOOSTER_KEY, 'random');
+    const [onlyGodPack] = useLocalStorage<boolean>(PREFERENCES_WONDER_PICK_ONLY_GOD_PACK_KEY, false);
     const [forcedCard, setForcedCard] = useState<Card | undefined>();
-    const [selectedBooster, setSelectedBooster] = useState<Booster | undefined>();
+    const [selectedBoosterType, setSelectedBoosterType] = useState<Booster | undefined>();
     const [cards, setCards] = useState<Card[]>([]);
     const [selectedCard, setSelectedCard] = useState<Card | undefined>();
     const [gameState, setGameState] = useState('');
 
     useEffect(() => {
-        const { cardsList, prePickedCard, booster } = generateWonderPick(preferredBooster);
+        const { cardsList, prePickedCard, boosterType } = generateWonderPick(preferredBooster, onlyGodPack);
         setCards(cardsList);
         setForcedCard(prePickedCard);
-        setSelectedBooster(booster);
+        setSelectedBoosterType(boosterType);
     }, []);
 
     const launchWonderPick = async () => {
@@ -38,12 +39,15 @@ export default function Game() {
         setGameState('started flipped selectable');
     }
 
-    const resetGame = (targetBooster: Booster | 'random' = preferredBooster) => {
+    const resetGame = (
+        targetBooster: Booster | 'random' = preferredBooster,
+        forceGodPack: boolean = onlyGodPack,
+    ) => {
         setGame(game + 1);
-        const { cardsList, prePickedCard, booster } = generateWonderPick(targetBooster);
+        const { cardsList, prePickedCard, boosterType } = generateWonderPick(targetBooster, forceGodPack);
         setCards(cardsList);
         setForcedCard(prePickedCard);
-        setSelectedBooster(booster);
+        setSelectedBoosterType(boosterType);
         setSelectedCard(undefined);
         setGameState('');
     }
@@ -101,11 +105,11 @@ export default function Game() {
                 <div className="absolute top-0 left-0 w-full h-[25vh] bg-[#e0eaf5] [clip-path:polygon(0_0,100%_0,100%_80%,0%_100%)]" />
                 <div className="absolute bottom-0 left-0 w-full h-[25vh] bg-[#dde7f3] [clip-path:polygon(0_20%,100%_0,100%_100%,0%_100%)]" />
                 <div className={`group relative mx-auto mb-8 transition-all duration-600 ease-in-out text-center min-h-[88px] ${gameState}`}>
-                    {selectedBooster && (
+                    {selectedBoosterType && (
                         <div className="inline-block opacity-1 px-8 py-2.5 leading-10 font-light bg-[#F2F8FC] text-[#878D96] rounded-[28px] shadow-[0_0_11px_0_#d7d8dc] relative mb-8 text-base transition-all duration-300 ease-in-out pl-20 data-[visible=true]:inline-block data-[visible=true]:opacity-100 group-[.started]:hidden group-[.end]:hidden max-422:text-[0.78rem]">
                             <div
                                 className="absolute top-0 left-5 w-[41px] h-20 bg-[length:41px_80px] bg-no-repeat transform -translate-y-[12%] rotate-[10deg]"
-                                style={{ backgroundImage: `url('/boosters/${selectedBooster}.webp')` }}
+                                style={{ backgroundImage: `url('/boosters/${selectedBoosterType}.webp')` }}
                             />
                             Wonder picking this booster pack!
                         </div>
@@ -144,14 +148,22 @@ export default function Game() {
                         />
                     </div>
                 </div>
-                <div className='mt-8 relative'>
+                <div className='mt-8 relative flex gap-4 items-center justify-center'>
                     {gameState === '' && (
-                        <button
-                            onClick={launchWonderPick}
-                            className="px-10 py-2.5 h-12 box-border font-light border-none bg-gradient-to-t from-[#3AC0B3] to-[#00d4ff] text-white rounded-[23px] transition-all duration-300 ease-in-out select-none text-base cursor-pointer hover:from-[#37e6d5] hover:to-[#00d4ff] focus:outline-none"
-                        >
-                            Start Wonder Pick
-                        </button>
+                        <>
+                            <button
+                                onClick={launchWonderPick}
+                                className="px-10 py-2.5 h-12 box-border font-light border-none bg-gradient-to-t from-[#3AC0B3] to-[#00d4ff] text-white rounded-[23px] transition-all duration-300 ease-in-out select-none text-base cursor-pointer hover:from-[#37e6d5] hover:to-[#00d4ff] focus:outline-none"
+                            >
+                                Start
+                            </button>
+                            <button
+                                onClick={() => { resetGame(); }}
+                                className="px-10 py-2.5 h-12 box-border font-light border-none bg-gradient-to-t from-[#3AC0B3] to-[#00d4ff] text-white rounded-[23px] transition-all duration-300 ease-in-out select-none text-base cursor-pointer hover:from-[#37e6d5] hover:to-[#00d4ff] focus:outline-none"
+                            >
+                                Reload
+                            </button>
+                        </>
                     )}
                     {gameState === 'end' && (
                         <button

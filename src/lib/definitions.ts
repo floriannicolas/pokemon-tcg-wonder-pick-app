@@ -25,5 +25,5 @@ export enum Booster {
 export type WonderPickResponse = {
     cardsList: Card[];
     prePickedCard: Card;
-    booster: Booster;
+    boosterType: Booster;
 }

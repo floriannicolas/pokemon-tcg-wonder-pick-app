@@ -2,6 +2,7 @@
 
 import { useLocalStorage } from 'usehooks-ts';
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
 import {
     RadioGroup,
     RadioGroupItem,
@@ -40,27 +41,32 @@ const PreferencesFormSchema = z.object({
     ], {
         required_error: "You need to select a booster type.",
     }),
+    onlyGodPack: z.boolean(),
 });
 
-export const PREFERENCES_BOOSTER_KEY = 'preferences-booster';
+export const PREFERENCES_WONDER_PICK_BOOSTER_KEY = 'preferences-wonder-pick-booster';
+export const PREFERENCES_WONDER_PICK_ONLY_GOD_PACK_KEY = 'preferences-wonder-pick-only-god-pack';
 
 export default function Preferences({
     onSave,
 }: {
-    onSave: (selectedBooster: Booster | 'random') => void,
+    onSave: (selectedBooster: Booster | 'random', onlyGodPack: boolean) => void,
 }) {
-    const [preferredBooster, setPreferredBooster] = useLocalStorage<Booster | 'random'>(PREFERENCES_BOOSTER_KEY, 'random');
+    const [preferredBooster, setPreferredBooster] = useLocalStorage<Booster | 'random'>(PREFERENCES_WONDER_PICK_BOOSTER_KEY, 'random');
+    const [onlyGodPack, setOnlyGodPack] = useLocalStorage<boolean>(PREFERENCES_WONDER_PICK_ONLY_GOD_PACK_KEY, false);
     const form = useForm<z.infer<typeof PreferencesFormSchema>>({
         resolver: zodResolver(PreferencesFormSchema),
         defaultValues: {
             booster: preferredBooster,
+            onlyGodPack: onlyGodPack,
         },
     });
 
     function onSubmit(data: z.infer<typeof PreferencesFormSchema>) {
         console.log('submitPreferences', data);
         setPreferredBooster(data.booster);
-        onSave(data.booster);
+        setOnlyGodPack(data.onlyGodPack);
+        onSave(data.booster, data.onlyGodPack);
     }
 
     return (
@@ -138,6 +144,23 @@ export default function Preferences({
                                                 </FormItem>
 
                                             </RadioGroup>
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="onlyGodPack"
+                                render={({ field }) => (
+                                    <FormItem className="flex gap-2 items-center">
+                                        <FormLabel>Pick only God Packs:</FormLabel>
+                                        <FormControl>
+                                            <Switch
+                                                className="!mt-0"
+                                                checked={field.value}
+                                                onCheckedChange={field.onChange}
+                                            />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>

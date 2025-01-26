@@ -26,7 +26,10 @@ export default function Game() {
         setSelectedBoosterType(boosterType);
     }, []);
 
-    const launchWonderPick = async () => {
+    /**
+     * Start wonder pick with animations.
+     */
+    const startWonderPick = async () => {
         setGameState('flipped');
         await delay(1800);
         setCards(cards.sort(() => 0.5 - Math.random()));
@@ -39,6 +42,12 @@ export default function Game() {
         setGameState('started flipped selectable');
     }
 
+    /**
+     * Reset game.
+     *
+     * @param targetBooster target booster type
+     * @param forceGodPack force only god pack?
+     */
     const resetGame = (
         targetBooster: Booster | 'random' = preferredBooster,
         forceGodPack: boolean = onlyGodPack,
@@ -52,6 +61,14 @@ export default function Game() {
         setGameState('');
     }
 
+    /**
+     * Select card.
+     *
+     * @param targetIndex target index
+     * @param targetCard target card
+     *
+     * @returns void
+     */
     const selectCard = async (targetIndex: number, targetCard: Card) => {
         if (selectedCard || !gameState.includes('selectable')) {
             return;
@@ -152,7 +169,7 @@ export default function Game() {
                     {gameState === '' && (
                         <>
                             <button
-                                onClick={launchWonderPick}
+                                onClick={startWonderPick}
                                 className="px-10 py-2.5 h-12 box-border font-light border-none bg-gradient-to-t from-[#3AC0B3] to-[#00d4ff] text-white rounded-[23px] transition-all duration-300 ease-in-out select-none text-base cursor-pointer hover:from-[#37e6d5] hover:to-[#00d4ff] focus:outline-none"
                             >
                                 Start

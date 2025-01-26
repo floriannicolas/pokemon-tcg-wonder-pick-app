@@ -9,7 +9,8 @@ const BoostersList = [
 ];
 
 /**
- * Rules: 
+ * Get booster cards list using true probabilities.
+ *
  * Pick 5 cards with the following probabilities:
  * 
  * Probability of Normal pack: 99.95%
@@ -39,12 +40,17 @@ const BoostersList = [
  *   - CardRarity.SAR/CardRarity.SR: 47.368%
  *   - CardRarity.AR: 42.105%
  *   - RR: 6.664%
+ * 
+ * @param boosterType target booster type
+ * @param forceGodPack force god pack?
+ *
+ * @returns List of 5 cards.
  */
 export const getBoosterCardsList = (
-    booster: Booster,
+    boosterType: Booster,
     forceGodPack: boolean,
 ) : Card[] => {
-    const targetCards =  ALL_CARDS[booster];
+    const targetCards =  ALL_CARDS[boosterType];
     const isGodPack = forceGodPack ? true : Math.random() < 0.0005; // 0.05% chance
 
     if (isGodPack) {
@@ -103,12 +109,27 @@ export const getBoosterCardsList = (
     return normalPack;
 };
 
-export const getRandomCardList = (
-    booster: Booster,
+/**
+ * Get totally random booster cards list.
+ *
+ * @param boosterType 
+ *
+ * @returns List of 5 cards.
+ */
+export const getRandomBoosterCardsList = (
+    boosterType: Booster,
 ) : Card[] => {
-    return ALL_CARDS[booster].sort(() => Math.random() - 0.5).slice(0, 5);
+    return ALL_CARDS[boosterType].sort(() => Math.random() - 0.5).slice(0, 5);
 }
 
+/**
+ * Generate wonder pick.
+ *
+ * @param targetBooster target booster type
+ * @param forceGodPack force god pack?
+ *
+ * @returns WonderPickResponse
+ */
 export const generateWonderPick = (
     targetBooster: Booster | 'random' = 'random',
     forceGodPack: boolean = false,

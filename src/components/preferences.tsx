@@ -62,6 +62,11 @@ export default function Preferences({
         },
     });
 
+    /**
+     * On submit preferences form.
+     *
+     * @param data form data
+     */
     function onSubmit(data: z.infer<typeof PreferencesFormSchema>) {
         console.log('submitPreferences', data);
         setPreferredBooster(data.booster);

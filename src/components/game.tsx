@@ -170,13 +170,13 @@ export default function Game() {
                         <>
                             <button
                                 onClick={startWonderPick}
-                                className="px-10 py-2.5 h-12 box-border font-light border-none bg-gradient-to-t from-[#3AC0B3] to-[#00d4ff] text-white rounded-[23px] transition-all duration-300 ease-in-out select-none text-base cursor-pointer hover:from-[#37e6d5] hover:to-[#00d4ff] focus:outline-none"
+                                className="px-10 py-2.5 h-12 box-border font-light border-none bg-gradient-to-t from-[#3AC0B3] to-[#00d4ff] text-white rounded-[23px] transition-all duration-300 ease-in-out shadow-sm select-none text-base cursor-pointer hover:from-[#37e6d5] hover:to-[#00d4ff] focus:outline-none"
                             >
                                 Start
                             </button>
                             <button
                                 onClick={() => { resetGame(); }}
-                                className="px-10 py-2.5 h-12 box-border font-light border-none bg-gradient-to-t from-[#3AC0B3] to-[#00d4ff] text-white rounded-[23px] transition-all duration-300 ease-in-out select-none text-base cursor-pointer hover:from-[#37e6d5] hover:to-[#00d4ff] focus:outline-none"
+                                className="px-10 py-2.5 h-12 box-border font-light border-none bg-gradient-to-t from-[#fff] to-[#fff] rounded-[23px] transition-all duration-300 ease-in-out select-none shadow-sm text-base cursor-pointer hover:from-[#f4f4f4] hover:to-[#f4f4f4] focus:outline-none"
                             >
                                 Reload
                             </button>
@@ -185,7 +185,7 @@ export default function Game() {
                     {gameState === 'end' && (
                         <button
                             onClick={() => { resetGame(); }}
-                            className="px-10 py-2.5 h-12 box-border font-light border-none bg-gradient-to-t from-[#3AC0B3] to-[#00d4ff] text-white rounded-[23px] transition-all duration-300 ease-in-out select-none text-base cursor-pointer hover:from-[#37e6d5] hover:to-[#00d4ff] focus:outline-none"
+                            className="px-10 py-2.5 h-12 box-border font-light border-none bg-gradient-to-t from-[#3AC0B3] to-[#00d4ff] text-white shadow-sm rounded-[23px] transition-all duration-300 ease-in-out select-none text-base cursor-pointer hover:from-[#37e6d5] hover:to-[#00d4ff] focus:outline-none"
                         >
                             New Pick
                         </button>

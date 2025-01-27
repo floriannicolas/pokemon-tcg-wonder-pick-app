@@ -3,7 +3,7 @@
   max-width: 560px;
   margin: 0 auto;
   perspective: 2000px;
-  transform-style: preserve-3d;
+  transform-style: flat;
 }
 
 .card {
@@ -122,9 +122,9 @@
 
 .content-cards.shuffled .card {
   animation-duration: 1.3s;
-  animation-timing-function: ease-in;
+  animation-timing-function: linear;
   animation-fill-mode: forwards;
-  transform-style: preserve-3d;
+  transform-style: flat;
 }
 
 .content-cards.shuffled .card:nth-child(1) {

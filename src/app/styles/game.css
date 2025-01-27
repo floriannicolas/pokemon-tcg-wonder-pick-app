@@ -123,6 +123,7 @@
 .content-cards.shuffled .card {
   animation-duration: 1.3s;
   animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
   transform-style: preserve-3d;
 }
 

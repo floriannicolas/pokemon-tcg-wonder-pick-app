@@ -42,7 +42,9 @@ export default function Game({
         setGameState('started flipped centered');
         await delay(800);
         setGameState('started flipped centered shuffled');
-        await delay(1800);
+        await delay(1500);
+        setGameState('started flipped centered');
+        await delay(200);
         setGameState('started flipped');
         await delay(800);
         setGameState('started flipped selectable');

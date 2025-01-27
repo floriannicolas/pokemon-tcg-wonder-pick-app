@@ -10,7 +10,7 @@
 
 @keyframes animation-rotate-back {
     0% {
-        transform: rotateY(180deg);
+        transform: rotateY(-180deg);
     }
 
     100% {

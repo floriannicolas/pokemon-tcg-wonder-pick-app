@@ -1,6 +1,7 @@
 "use client";
 
 import "@/app/styles/animations.css";
+import "@/app/styles/blue-tornado.css";
 import "@/app/styles/game.css";
 import { useEffect, useState } from 'react';
 import { delay } from '@/utils/delay';
@@ -42,7 +43,11 @@ export default function Game({
         setGameState('started flipped centered');
         await delay(800);
         setGameState('started flipped centered shuffled');
-        await delay(1700);
+        await delay(200);
+        setGameState('started flipped centered shuffled tornado');
+        await delay(1000);
+        setGameState('started flipped centered shuffled');
+        await delay(500);
         setGameState('started flipped centered');
         await delay(200);
         setGameState('started flipped');
@@ -171,6 +176,13 @@ export default function Game({
                             alt=""
                             className="relative block w-full m-0"
                         />
+                    </div>
+                    <div className="content-tornado">
+                        <div className="inner">
+                            <div className="banner">
+                                {[...Array(8)].map((e, i) => <span className="panel" key={i} />)}
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className='mt-8 relative flex gap-4 items-center justify-center'>

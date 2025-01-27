@@ -121,7 +121,7 @@
 }
 
 .content-cards.shuffled .card {
-  animation-duration: 1.3s;
+  animation-duration: 1.4s;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
   transform-style: flat;

@@ -1,4 +1,4 @@
-.content-tornado {
+.content-whirlwind {
     position: absolute;
     top: 0;
     left: 0;
@@ -13,7 +13,7 @@
     opacity: 0.8;
 }
 
-.content-tornado .inner {
+.content-whirlwind .inner {
     position: relative;
     transform-style: preserve-3d;
     scale: 1.44;
@@ -21,7 +21,7 @@
     animation: pulseScaleTornado .3s infinite linear;
 }
 
-.content-tornado .banner {
+.content-whirlwind .banner {
     display: flex;
     transform-style: preserve-3d;
     animation: rotateTornado .3s infinite linear;
@@ -88,7 +88,7 @@
     }
 }
 
-.content-tornado .banner .panel {
+.content-whirlwind .banner .panel {
     position: absolute;
     transform: translate(-50%, -70%) rotateY(var(--angle)) translateZ(190px);
     width: var(--width);
@@ -100,158 +100,158 @@
     overflow: hidden;
 }
 
-.content-tornado .banner .panel::before {
+.content-whirlwind .banner .panel::before {
     position: absolute;
     left: var(--left);
     content: "";
     height: 100%;
     width: 1960px;
-    background-image: url('/blue-tornado.webp');
+    background-image: url('/wonder-pick-whirlwind.webp');
     background-size: auto 100%;
     background-repeat: no-repeat;
     font-size: 96px;
     color: hsl(var(--hue), 75%, 75%);
 }
 
-.content-tornado .banner .panel:nth-child(1) {
+.content-whirlwind .banner .panel:nth-child(1) {
     --left: 0;
     --hue: 0;
     --angle: 0deg;
 }
 
-.content-tornado .banner .panel:nth-child(2) {
+.content-whirlwind .banner .panel:nth-child(2) {
     --left: calc(var(--width) * -1);
     --hue: 15;
     --angle: 15deg;
 }
 
-.content-tornado .banner .panel:nth-child(3) {
+.content-whirlwind .banner .panel:nth-child(3) {
     --left: calc(var(--width) * -2);
     --hue: 30;
     --angle: 30deg;
 }
 
-.content-tornado .banner .panel:nth-child(4) {
+.content-whirlwind .banner .panel:nth-child(4) {
     --left: calc(var(--width) * -3);
     --hue: 45;
     --angle: 45deg;
 }
 
-.content-tornado .banner .panel:nth-child(5) {
+.content-whirlwind .banner .panel:nth-child(5) {
     --left: calc(var(--width) * -4);
     --hue: 60;
     --angle: 60deg;
 }
 
-.content-tornado .banner .panel:nth-child(6) {
+.content-whirlwind .banner .panel:nth-child(6) {
     --left: calc(var(--width) * -5);
     --hue: 75;
     --angle: 75deg;
 }
 
-.content-tornado .banner .panel:nth-child(7) {
+.content-whirlwind .banner .panel:nth-child(7) {
     --left: calc(var(--width) * -6);
     --hue: 90;
     --angle: 90deg;
 }
 
-.content-tornado .banner .panel:nth-child(8) {
+.content-whirlwind .banner .panel:nth-child(8) {
     --left: calc(var(--width) * -7);
     --hue: 105;
     --angle: 105deg;
 }
 
-.content-tornado .banner .panel:nth-child(9) {
+.content-whirlwind .banner .panel:nth-child(9) {
     --left: calc(var(--width) * -8);
     --hue: 120;
     --angle: 120deg;
 }
 
-.content-tornado .banner .panel:nth-child(10) {
+.content-whirlwind .banner .panel:nth-child(10) {
     --left: calc(var(--width) * -9);
     --hue: 135;
     --angle: 135deg;
 }
 
-.content-tornado .banner .panel:nth-child(11) {
+.content-whirlwind .banner .panel:nth-child(11) {
     --left: calc(var(--width) * -10);
     --hue: 150;
     --angle: 150deg;
 }
 
-.content-tornado .banner .panel:nth-child(12) {
+.content-whirlwind .banner .panel:nth-child(12) {
     --left: calc(var(--width) * -11);
     --hue: 165;
     --angle: 165deg;
 }
 
-.content-tornado .banner .panel:nth-child(13) {
+.content-whirlwind .banner .panel:nth-child(13) {
     --left: calc(var(--width) * -12);
     --hue: 180;
     --angle: 180deg;
 }
 
-.content-tornado .banner .panel:nth-child(14) {
+.content-whirlwind .banner .panel:nth-child(14) {
     --left: calc(var(--width) * -13);
     --hue: 195;
     --angle: 195deg;
 }
 
-.content-tornado .banner .panel:nth-child(15) {
+.content-whirlwind .banner .panel:nth-child(15) {
     --left: calc(var(--width) * -14);
     --hue: 210;
     --angle: 210deg;
 }
 
-.content-tornado .banner .panel:nth-child(16) {
+.content-whirlwind .banner .panel:nth-child(16) {
     --left: calc(var(--width) * -15);
     --hue: 225;
     --angle: 225deg;
 }
 
-.content-tornado .banner .panel:nth-child(17) {
+.content-whirlwind .banner .panel:nth-child(17) {
     --left: calc(var(--width) * -16);
     --hue: 240;
     --angle: 240deg;
 }
 
-.content-tornado .banner .panel:nth-child(18) {
+.content-whirlwind .banner .panel:nth-child(18) {
     --left: calc(var(--width) * -17);
     --hue: 255;
     --angle: 255deg;
 }
 
-.content-tornado .banner .panel:nth-child(19) {
+.content-whirlwind .banner .panel:nth-child(19) {
     --left: calc(var(--width) * -18);
     --hue: 270;
     --angle: 270deg;
 }
 
-.content-tornado .banner .panel:nth-child(20) {
+.content-whirlwind .banner .panel:nth-child(20) {
     --left: calc(var(--width) * -19);
     --hue: 285;
     --angle: 285deg;
 }
 
-.content-tornado .banner .panel:nth-child(21) {
+.content-whirlwind .banner .panel:nth-child(21) {
     --left: calc(var(--width) * -20);
     --hue: 300;
     --angle: 300deg;
 }
 
-.content-tornado .banner .panel:nth-child(22) {
+.content-whirlwind .banner .panel:nth-child(22) {
     --left: calc(var(--width) * -21);
     --hue: 315;
     --angle: 315deg;
 }
 
-.content-tornado .banner .panel:nth-child(23) {
+.content-whirlwind .banner .panel:nth-child(23) {
     --left: calc(var(--width) * -22);
     --hue: 330;
     --angle: 330deg;
 }
 
-.content-tornado .banner .panel:nth-child(24) {
+.content-whirlwind .banner .panel:nth-child(24) {
     --left: calc(var(--width) * -23);
     --hue: 345;
     --angle: 345deg;

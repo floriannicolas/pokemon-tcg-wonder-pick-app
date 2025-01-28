@@ -1,7 +1,7 @@
 "use client";
 
 import "@/app/styles/animations.css";
-import "@/app/styles/blue-tornado.css";
+import "@/app/styles/whirlwind.css";
 import "@/app/styles/game.css";
 import { useEffect, useState } from 'react';
 import { delay } from '@/utils/delay';
@@ -44,7 +44,7 @@ export default function Game({
         await delay(800);
         setGameState('started flipped centered shuffled');
         await delay(200);
-        setGameState('started flipped centered shuffled tornado');
+        setGameState('started flipped centered shuffled whirlwind');
         await delay(500);
         setGameState('started flipped centered shuffled');
         await delay(1000);
@@ -177,8 +177,8 @@ export default function Game({
                             className="relative block w-full m-0"
                         />
                     </div>
-                    {gameState.includes('tornado') && (
-                        <div className="content-tornado">
+                    {gameState.includes('whirlwind') && (
+                        <div className="content-whirlwind">
                             <div className="inner">
                                 <div className="banner">
                                     {[...Array(24)].map((e, i) => <span className="panel" key={i} />)}

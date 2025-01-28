@@ -192,14 +192,15 @@ export default function Game({
                         <>
                             <button
                                 onClick={startWonderPick}
-                                className="px-10 py-2.5 h-12 box-border font-light border-none bg-gradient-to-t from-[#3AC0B3] to-[#00d4ff] text-white rounded-[23px] transition-all duration-300 ease-in-out shadow-sm select-none text-base cursor-pointer hover:from-[#37e6d5] hover:to-[#00d4ff] focus:outline-none"
+                                className="px-10 py-2.5 h-12 box-border font-medium border-none bg-gradient-to-t from-[#37e6d5] to-[#1decb5] text-white rounded-full transition-all duration-300 ease-in-out shadow-md select-none text-base cursor-pointer hover:from-[#51F7CB] hover:to-[#1decb5] focus:outline-none"
                             >
                                 Start
                             </button>
                             <button
                                 onClick={() => { resetGame(); }}
-                                className="px-10 py-2.5 h-12 box-border font-light border-none bg-gradient-to-t from-[#fff] to-[#fff] rounded-[23px] transition-all duration-300 ease-in-out select-none shadow-sm text-base cursor-pointer hover:from-[#f4f4f4] hover:to-[#f4f4f4] focus:outline-none"
+                                className="relative px-10 py-2.5 h-12 box-border font-medium border-none bg-gradient-to-t from-[#fff] to-[#fff] rounded-full transition-all duration-300 ease-in-out select-none shadow-md text-[#3A4452] cursor-pointer hover:from-[#f4f4f4] hover:to-[#f4f4f4] focus:outline-none"
                             >
+                                <span className="absolute top-[3px] bottom-[3px] left-[3px] right-[3px] border rounded-full border-[#51F7CB]"/>
                                 Reload
                             </button>
                         </>
@@ -207,7 +208,7 @@ export default function Game({
                     {gameState === 'end' && (
                         <button
                             onClick={() => { resetGame(); }}
-                            className="px-10 py-2.5 h-12 box-border font-light border-none bg-gradient-to-t from-[#3AC0B3] to-[#00d4ff] text-white shadow-sm rounded-[23px] transition-all duration-300 ease-in-out select-none text-base cursor-pointer hover:from-[#37e6d5] hover:to-[#00d4ff] focus:outline-none"
+                            className="px-10 py-2.5 h-12 box-border font-medium border-none bg-gradient-to-t from-[#37e6d5] to-[#1decb5] text-white shadow-md rounded-full transition-all duration-300 ease-in-out select-none text-base cursor-pointer hover:from-[#51F7CB] hover:to-[#1decb5] focus:outline-none"
                         >
                             New Pick
                         </button>

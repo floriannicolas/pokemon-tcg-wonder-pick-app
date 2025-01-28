@@ -200,7 +200,7 @@ export default function Game({
                                 onClick={() => { resetGame(); }}
                                 className="relative px-10 py-2.5 h-12 box-border font-medium border-none bg-gradient-to-t from-[#fff] to-[#fff] rounded-full transition-all duration-300 ease-in-out select-none shadow-md text-[#3A4452] cursor-pointer hover:from-[#f4f4f4] hover:to-[#f4f4f4] focus:outline-none"
                             >
-                                <span className="absolute top-[3px] bottom-[3px] left-[3px] right-[3px] border rounded-full border-[#51F7CB]"/>
+                                <span className="absolute top-[3px] bottom-[3px] left-[3px] right-[3px] border-2 rounded-full border-[#55DBE8]"/>
                                 Reload
                             </button>
                         </>

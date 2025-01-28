@@ -10,7 +10,7 @@
     perspective: 500px;
     perspective-origin: 50% calc(50% - 150px);
     z-index: 12;
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 .content-tornado .inner {

@@ -45,9 +45,9 @@ export default function Game({
         setGameState('started flipped centered shuffled');
         await delay(200);
         setGameState('started flipped centered shuffled tornado');
-        await delay(1000);
-        setGameState('started flipped centered shuffled');
         await delay(500);
+        setGameState('started flipped centered shuffled');
+        await delay(1000);
         setGameState('started flipped centered');
         await delay(200);
         setGameState('started flipped');
@@ -177,13 +177,15 @@ export default function Game({
                             className="relative block w-full m-0"
                         />
                     </div>
-                    <div className="content-tornado">
-                        <div className="inner">
-                            <div className="banner">
-                                {[...Array(8)].map((e, i) => <span className="panel" key={i} />)}
+                    {gameState.includes('tornado') && (
+                        <div className="content-tornado">
+                            <div className="inner">
+                                <div className="banner">
+                                    {[...Array(24)].map((e, i) => <span className="panel" key={i} />)}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    )}
                 </div>
                 <div className='mt-8 relative flex gap-4 items-center justify-center'>
                     {gameState === '' && (

@@ -10,34 +10,87 @@
     perspective: 500px;
     perspective-origin: 50% calc(50% - 150px);
     z-index: 12;
-    display: none;
-}
-
-.content-cards.tornado .content-tornado {
-    display: grid;
+    opacity: 0.7;
 }
 
 .content-tornado .inner {
     position: relative;
     transform-style: preserve-3d;
     scale: 1.44;
+    transform: rotate(-4deg);
+    animation: pulseScaleTornado .3s infinite linear;
 }
 
 .content-tornado .banner {
     display: flex;
     transform-style: preserve-3d;
-    animation: rotate .3s infinite linear;
+    animation: rotateTornado .3s infinite linear;
 }
 
-@keyframes rotate {
+@keyframes pulseScaleTornado {
+    0% {
+        scale: 1.44;
+    }
+    50% {
+        scale: 0.9;
+    }
+    100% {
+        scale: 1.44;
+    }
+}
+
+@media all and (max-width: 540px) {
+    @keyframes pulseScaleTornado {
+        0% {
+            scale: 1.1;
+        }
+        50% {
+            scale: 0.7;
+        }
+        100% {
+            scale: 1.1;
+        }
+    }    
+}
+
+@media all and (max-width: 440px) {
+    @keyframes pulseScaleTornado {
+        0% {
+            scale: 0.9;
+        }
+        50% {
+            scale: 0.5;
+        }
+        100% {
+            scale: 0.9;
+        }
+    }    
+}
+
+@media all and (max-width: 360px) {
+    @keyframes pulseScaleTornado {
+        0% {
+            scale: 0.7;
+        }
+        50% {
+            scale: 0.3;
+        }
+        100% {
+            scale: 0.7;
+        }
+    }    
+}
+
+
+@keyframes rotateTornado {
     to {
-        transform: rotateY(-360deg);
+        transform: rotateY(360deg);
     }
 }
 
 .content-tornado .banner .panel {
     position: absolute;
-    transform: translate(-50%, -50%) rotateY(var(--angle)) translateZ(190px);
+    transform: translate(-50%, -70%) rotateY(var(--angle)) translateZ(190px);
     width: var(--width);
     height: 240px;
     /*
@@ -53,7 +106,7 @@
     content: "";
     height: 100%;
     width: 1960px;
-    background-image: url('/blue-tornado.png');
+    background-image: url('/blue-tornado.webp');
     background-size: auto 100%;
     background-repeat: no-repeat;
     font-size: 96px;
@@ -68,210 +121,138 @@
 
 .content-tornado .banner .panel:nth-child(2) {
     --left: calc(var(--width) * -1);
-    --hue: 10;
-    --angle: 10deg;
+    --hue: 15;
+    --angle: 15deg;
 }
 
 .content-tornado .banner .panel:nth-child(3) {
     --left: calc(var(--width) * -2);
-    --hue: 20;
-    --angle: 20deg;
-}
-
-.content-tornado .banner .panel:nth-child(4) {
-    --left: calc(var(--width) * -3);
     --hue: 30;
     --angle: 30deg;
 }
 
+.content-tornado .banner .panel:nth-child(4) {
+    --left: calc(var(--width) * -3);
+    --hue: 45;
+    --angle: 45deg;
+}
+
 .content-tornado .banner .panel:nth-child(5) {
     --left: calc(var(--width) * -4);
-    --hue: 40;
-    --angle: 40deg;
-}
-
-.content-tornado .banner .panel:nth-child(6) {
-    --left: calc(var(--width) * -5);
-    --hue: 50;
-    --angle: 50deg;
-}
-
-.content-tornado .banner .panel:nth-child(7) {
-    --left: calc(var(--width) * -6);
     --hue: 60;
     --angle: 60deg;
 }
 
-.content-tornado .banner .panel:nth-child(8) {
-    --left: calc(var(--width) * -7);
-    --hue: 70;
-    --angle: 70deg;
+.content-tornado .banner .panel:nth-child(6) {
+    --left: calc(var(--width) * -5);
+    --hue: 75;
+    --angle: 75deg;
 }
 
-.content-tornado .banner .panel:nth-child(9) {
-    --left: calc(var(--width) * -8);
-    --hue: 80;
-    --angle: 80deg;
-}
-
-.content-tornado .banner .panel:nth-child(10) {
-    --left: calc(var(--width) * -9);
+.content-tornado .banner .panel:nth-child(7) {
+    --left: calc(var(--width) * -6);
     --hue: 90;
     --angle: 90deg;
 }
 
-.content-tornado .banner .panel:nth-child(11) {
-    --left: calc(var(--width) * -10);
-    --hue: 100;
-    --angle: 100deg;
+.content-tornado .banner .panel:nth-child(8) {
+    --left: calc(var(--width) * -7);
+    --hue: 105;
+    --angle: 105deg;
 }
 
-.content-tornado .banner .panel:nth-child(12) {
-    --left: calc(var(--width) * -11);
-    --hue: 110;
-    --angle: 110deg;
-}
-
-.content-tornado .banner .panel:nth-child(13) {
-    --left: calc(var(--width) * -12);
+.content-tornado .banner .panel:nth-child(9) {
+    --left: calc(var(--width) * -8);
     --hue: 120;
     --angle: 120deg;
 }
 
-.content-tornado .banner .panel:nth-child(14) {
-    --left: calc(var(--width) * -13);
-    --hue: 130;
-    --angle: 130deg;
+.content-tornado .banner .panel:nth-child(10) {
+    --left: calc(var(--width) * -9);
+    --hue: 135;
+    --angle: 135deg;
 }
 
-.content-tornado .banner .panel:nth-child(15) {
-    --left: calc(var(--width) * -14);
-    --hue: 140;
-    --angle: 140deg;
-}
-
-.content-tornado .banner .panel:nth-child(16) {
-    --left: calc(var(--width) * -15);
+.content-tornado .banner .panel:nth-child(11) {
+    --left: calc(var(--width) * -10);
     --hue: 150;
     --angle: 150deg;
 }
 
-.content-tornado .banner .panel:nth-child(17) {
-    --left: calc(var(--width) * -16);
-    --hue: 160;
-    --angle: 160deg;
+.content-tornado .banner .panel:nth-child(12) {
+    --left: calc(var(--width) * -11);
+    --hue: 165;
+    --angle: 165deg;
 }
 
-.content-tornado .banner .panel:nth-child(18) {
-    --left: calc(var(--width) * -17);
-    --hue: 170;
-    --angle: 170deg;
-}
-
-.content-tornado .banner .panel:nth-child(19) {
-    --left: calc(var(--width) * -18);
+.content-tornado .banner .panel:nth-child(13) {
+    --left: calc(var(--width) * -12);
     --hue: 180;
     --angle: 180deg;
 }
 
-.content-tornado .banner .panel:nth-child(20) {
-    --left: calc(var(--width) * -19);
-    --hue: 190;
-    --angle: 190deg;
+.content-tornado .banner .panel:nth-child(14) {
+    --left: calc(var(--width) * -13);
+    --hue: 195;
+    --angle: 195deg;
 }
 
-.content-tornado .banner .panel:nth-child(21) {
-    --left: calc(var(--width) * -20);
-    --hue: 200;
-    --angle: 200deg;
-}
-
-.content-tornado .banner .panel:nth-child(22) {
-    --left: calc(var(--width) * -21);
+.content-tornado .banner .panel:nth-child(15) {
+    --left: calc(var(--width) * -14);
     --hue: 210;
     --angle: 210deg;
 }
 
-.content-tornado .banner .panel:nth-child(23) {
-    --left: calc(var(--width) * -22);
-    --hue: 220;
-    --angle: 220deg;
+.content-tornado .banner .panel:nth-child(16) {
+    --left: calc(var(--width) * -15);
+    --hue: 225;
+    --angle: 225deg;
 }
 
-.content-tornado .banner .panel:nth-child(24) {
-    --left: calc(var(--width) * -23);
-    --hue: 230;
-    --angle: 230deg;
-}
-
-.content-tornado .banner .panel:nth-child(25) {
-    --left: calc(var(--width) * -24);
+.content-tornado .banner .panel:nth-child(17) {
+    --left: calc(var(--width) * -16);
     --hue: 240;
     --angle: 240deg;
 }
 
-.content-tornado .banner .panel:nth-child(26) {
-    --left: calc(var(--width) * -25);
-    --hue: 250;
-    --angle: 250deg;
+.content-tornado .banner .panel:nth-child(18) {
+    --left: calc(var(--width) * -17);
+    --hue: 255;
+    --angle: 255deg;
 }
 
-.content-tornado .banner .panel:nth-child(27) {
-    --left: calc(var(--width) * -26);
-    --hue: 260;
-    --angle: 260deg;
-}
-
-.content-tornado .banner .panel:nth-child(28) {
-    --left: calc(var(--width) * -27);
+.content-tornado .banner .panel:nth-child(19) {
+    --left: calc(var(--width) * -18);
     --hue: 270;
     --angle: 270deg;
 }
 
-.content-tornado .banner .panel:nth-child(29) {
-    --left: calc(var(--width) * -28);
-    --hue: 280;
-    --angle: 280deg;
+.content-tornado .banner .panel:nth-child(20) {
+    --left: calc(var(--width) * -19);
+    --hue: 285;
+    --angle: 285deg;
 }
 
-.content-tornado .banner .panel:nth-child(30) {
-    --left: calc(var(--width) * -29);
-    --hue: 290;
-    --angle: 290deg;
-}
-
-.content-tornado .banner .panel:nth-child(31) {
-    --left: calc(var(--width) * -30);
+.content-tornado .banner .panel:nth-child(21) {
+    --left: calc(var(--width) * -20);
     --hue: 300;
     --angle: 300deg;
 }
 
-.content-tornado .banner .panel:nth-child(32) {
-    --left: calc(var(--width) * -31);
-    --hue: 310;
-    --angle: 310deg;
+.content-tornado .banner .panel:nth-child(22) {
+    --left: calc(var(--width) * -21);
+    --hue: 315;
+    --angle: 315deg;
 }
 
-.content-tornado .banner .panel:nth-child(33) {
-    --left: calc(var(--width) * -32);
-    --hue: 320;
-    --angle: 320deg;
-}
-
-.content-tornado .banner .panel:nth-child(34) {
-    --left: calc(var(--width) * -33);
+.content-tornado .banner .panel:nth-child(23) {
+    --left: calc(var(--width) * -22);
     --hue: 330;
     --angle: 330deg;
 }
 
-.content-tornado .banner .panel:nth-child(35) {
-    --left: calc(var(--width) * -34);
-    --hue: 340;
-    --angle: 340deg;
-}
-
-.content-tornado .banner .panel:nth-child(36) {
-    --left: calc(var(--width) * -35);
-    --hue: 350;
-    --angle: 350deg;
+.content-tornado .banner .panel:nth-child(24) {
+    --left: calc(var(--width) * -23);
+    --hue: 345;
+    --angle: 345deg;
 }

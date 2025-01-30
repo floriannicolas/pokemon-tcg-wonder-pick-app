@@ -6,6 +6,8 @@ const BoostersList = [
     Booster.A1_CHARIZARD,
     Booster.A1_MEWTWO,
     Booster.A1_PIKACHU,
+    Booster.A2_DIALGA,
+    Booster.A2_PALKIA,
 ];
 
 const BoostersListSeedReference = {
@@ -13,6 +15,8 @@ const BoostersListSeedReference = {
     [Booster.A1_CHARIZARD]: 'A1C',
     [Booster.A1_MEWTWO]: 'A1M',
     [Booster.A1_PIKACHU]: 'A1P',
+    [Booster.A2_DIALGA]: 'A2D',
+    [Booster.A2_PALKIA]: 'A2P',
 }
 
 /**

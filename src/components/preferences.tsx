@@ -147,7 +147,24 @@ export default function Preferences({
                                                         <span className="font-bold">A1A</span> - Mew
                                                     </FormLabel>
                                                 </FormItem>
-
+                                                <FormItem className="flex items-center space-x-3 space-y-0">
+                                                    <FormControl>
+                                                        <RadioGroupItem value={Booster.A2_DIALGA} />
+                                                    </FormControl>
+                                                    <FormLabel className="font-normal flex gap-2 items-center">
+                                                        <div className="h-8 w-4 bg-contain bg-no-repeat" style={{ backgroundImage: `url('/boosters/${Booster.A2_DIALGA}.webp')` }} />
+                                                        <span className="font-bold">A2</span> - Dialga
+                                                    </FormLabel>
+                                                </FormItem>
+                                                <FormItem className="flex items-center space-x-3 space-y-0">
+                                                    <FormControl>
+                                                        <RadioGroupItem value={Booster.A2_PALKIA} />
+                                                    </FormControl>
+                                                    <FormLabel className="font-normal flex gap-2 items-center">
+                                                        <div className="h-8 w-4 bg-contain bg-no-repeat" style={{ backgroundImage: `url('/boosters/${Booster.A2_PALKIA}.webp')` }} />
+                                                        <span className="font-bold">A2</span> - Palkia
+                                                    </FormLabel>
+                                                </FormItem>
                                             </RadioGroup>
                                         </FormControl>
                                         <FormMessage />

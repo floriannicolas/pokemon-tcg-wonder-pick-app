@@ -20,6 +20,8 @@ export enum Booster {
     A1_MEWTWO = 'a1-mewtwo',
     A1_PIKACHU = 'a1-pikachu',
     A1A_MEW = 'a1a-mew',
+    A2_DIALGA = 'a2-dialga',
+    A2_PALKIA = 'a2-palkia',
 }
 
 export type WonderPickResponse = {

@@ -39,7 +39,7 @@ export default function Game({
     const startWonderPick = async () => {
         setGameState('flipped');
         await delay(1800);
-        setCards([...(cards.sort(() => 0.5 - Math.random()))]);
+        setCards([...cards].sort(() => 0.5 - Math.random()));
         setGameState('started flipped centered');
         await delay(800);
         setGameState('started flipped centered shuffled');

@@ -91,6 +91,14 @@ export default function Game({
         if (!cardItem) {
             return;
         }
+
+        const frontList = cardItem.getElementsByClassName('front');
+        if (frontList && frontList.length > 0) {
+            const front = frontList[0] as HTMLDivElement;
+            front.style.backgroundImage = `url(${forcedCard?.image})`;
+        }
+        await delay(200);
+
         const starsContainer = document.createElement('div');
         starsContainer.className = 'stars-container';
 
@@ -105,12 +113,7 @@ export default function Game({
 
         cardItem.appendChild(starsContainer);
 
-        const frontList = cardItem.getElementsByClassName('front');
-        if (frontList && frontList.length > 0) {
-            const front = frontList[0] as HTMLDivElement;
-            front.style.backgroundImage = `url(${forcedCard?.image})`;
-        }
-        await delay(300);
+
         cardItem.className = 'card picked new';
         setSelectedCard(targetCard);
         await delay(1400);

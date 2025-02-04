@@ -110,6 +110,7 @@ export default function Game({
             const front = frontList[0] as HTMLDivElement;
             front.style.backgroundImage = `url(${forcedCard?.image})`;
         }
+        await delay(300);
         cardItem.className = 'card picked new';
         setSelectedCard(targetCard);
         await delay(1400);

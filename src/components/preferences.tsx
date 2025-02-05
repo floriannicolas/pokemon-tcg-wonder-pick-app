@@ -111,17 +111,21 @@ export default function Preferences({
                                                         Random
                                                     </FormLabel>
                                                 </FormItem>
-                                                {Object.entries(Booster).map(([key, value]) => (
-                                                    <FormItem key={key} className="flex items-center space-x-3 space-y-0">
-                                                        <FormControl>
-                                                            <RadioGroupItem value={value} />
-                                                        </FormControl>
-                                                        <FormLabel className="font-normal flex gap-2 items-center">
-                                                            <div className="h-8 w-4 bg-contain bg-no-repeat" style={{ backgroundImage: `url('/boosters/${value}.webp')` }} />
-                                                            <span className="font-bold">{key.split('_')[0]}</span> - {`${key.split('_')[1].charAt(0).toUpperCase()}${key.split('_')[1].slice(1).toLowerCase()}`}
-                                                        </FormLabel>
-                                                    </FormItem>
-                                                ))}
+                                                {Object.entries(Booster).map(([key, value]) => {
+                                                    const [boosterEdition, boosterLabel] = key.split('_');
+                                                    const boosterLabelCapitalized = `${boosterLabel.charAt(0).toUpperCase()}${boosterLabel.slice(1).toLowerCase()}`;
+                                                    return (
+                                                        <FormItem key={key} className="flex items-center space-x-3 space-y-0">
+                                                            <FormControl>
+                                                                <RadioGroupItem value={value} />
+                                                            </FormControl>
+                                                            <FormLabel className="font-normal flex gap-2 items-center">
+                                                                <div className="h-8 w-4 bg-contain bg-no-repeat" style={{ backgroundImage: `url('/boosters/${value}.webp')` }} />
+                                                                <span className="font-bold">{boosterEdition}</span> - {boosterLabelCapitalized}
+                                                            </FormLabel>
+                                                        </FormItem>
+                                                    );
+                                                })}
                                             </RadioGroup>
                                         </FormControl>
                                         <FormMessage />

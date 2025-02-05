@@ -1,23 +1,11 @@
 import { Booster, Card, WonderPickResponse, CardRarity } from "@/lib/definitions";
 import { ALL_CARDS, FORCED_CARD_PIDGEY_IMAGE } from "./cards";
 
-const BoostersList = [
-    Booster.A1A_MEW,
-    Booster.A1_CHARIZARD,
-    Booster.A1_MEWTWO,
-    Booster.A1_PIKACHU,
-    Booster.A2_DIALGA,
-    Booster.A2_PALKIA,
-];
+const BoostersList = Object.values(Booster);
 
-const BoostersListSeedReference = {
-    [Booster.A1A_MEW]: 'A1AM',
-    [Booster.A1_CHARIZARD]: 'A1C',
-    [Booster.A1_MEWTWO]: 'A1M',
-    [Booster.A1_PIKACHU]: 'A1P',
-    [Booster.A2_DIALGA]: 'A2D',
-    [Booster.A2_PALKIA]: 'A2P',
-}
+const BoostersListSeedReference = Object.fromEntries(
+    Object.entries(Booster).map(([key, value]) => ([value, key.split('_')[0] + key.split('_')[1].charAt(0)]))
+);
 
 /**
  * Get booster cards list using true probabilities.

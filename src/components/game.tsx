@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import "@/app/styles/animations.css";
@@ -32,6 +33,10 @@ export default function Game({
         setForcedCard(prePickedCard);
         setSelectedBoosterType(boosterType);
     }, []);
+
+    if (cards.length === 0) {
+        return null;
+    }
 
     /**
      * Start wonder pick with animations.

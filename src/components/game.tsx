@@ -4,12 +4,17 @@
 import "@/app/styles/animations.css";
 import "@/app/styles/whirlwind.css";
 import "@/app/styles/game.css";
-import { useEffect, useState } from 'react';
+import { createRoot } from 'react-dom/client';
+import { useCallback, useEffect, useState } from 'react';
 import { delay } from '@/utils/delay';
 import { Booster, Card, WonderPickResponse } from "@/lib/definitions";
 import { generateWonderPick } from "@/utils/wonder-pick";
 import Preferences, { PREFERENCES_WONDER_PICK_BOOSTER_KEY, PREFERENCES_WONDER_PICK_ONLY_GOD_PACK_KEY } from "./preferences";
 import { useLocalStorage } from "usehooks-ts";
+import GameTitle from "./game-title";
+import GameActions from "./game-actions";
+import { CardStars } from "./card-stars";
+import ContentCards from "./content-cards";
 
 export default function Game({
     seedResponse,
@@ -34,14 +39,10 @@ export default function Game({
         setSelectedBoosterType(boosterType);
     }, []);
 
-    if (cards.length === 0) {
-        return null;
-    }
-
     /**
      * Start wonder pick with animations.
      */
-    const startWonderPick = async () => {
+    const startWonderPick = useCallback(async () => {
         setGameState('flipped');
         await delay(1800);
         setCards([...cards].sort(() => 0.5 - Math.random()));
@@ -58,7 +59,7 @@ export default function Game({
         setGameState('started flipped');
         await delay(800);
         setGameState('started flipped selectable');
-    }
+    }, [cards]);
 
     /**
      * Reset game.
@@ -104,20 +105,10 @@ export default function Game({
         }
         await delay(200);
 
-        const starsContainer = document.createElement('div');
-        starsContainer.className = 'stars-container';
-
-        for (let i = 0; i < 6; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.animation = `star-twinkle 0.6s ease-out ${i * 0.1}s forwards`;
-            starsContainer.appendChild(star);
-        }
-
-        cardItem.appendChild(starsContainer);
-
+        const starsRoot = document.createElement('div');
+        const root = createRoot(starsRoot);
+        root.render(<CardStars />);
+        cardItem.appendChild(starsRoot);
 
         cardItem.className = 'card picked new';
         setSelectedCard(targetCard);
@@ -138,92 +129,18 @@ export default function Game({
         setGameState('end');
     }
 
+    if (cards.length === 0) {
+        return null;
+    }
+
     return (
         <>
             <div className="text-center mx-auto max-w-7xl p-8">
                 <div className="absolute top-0 left-0 w-full h-[25vh] bg-[#e0eaf5] [clip-path:polygon(0_0,100%_0,100%_80%,0%_100%)]" />
                 <div className="absolute bottom-0 left-0 w-full h-[25vh] bg-[#dde7f3] [clip-path:polygon(0_20%,100%_0,100%_100%,0%_100%)]" />
-                <div className={`group relative mx-auto mb-8 transition-all duration-600 ease-in-out text-center min-h-[88px] ${gameState}`}>
-                    {selectedBoosterType && (
-                        <div className="inline-block opacity-1 px-8 py-2.5 leading-10 font-light bg-[#F2F8FC] text-[#878D96] rounded-[28px] shadow-[0_0_11px_0_#d7d8dc] relative mb-8 text-base transition-all duration-300 ease-in-out pl-20 data-[visible=true]:inline-block data-[visible=true]:opacity-100 group-[.started]:hidden group-[.end]:hidden max-422:text-[0.78rem]">
-                            <div
-                                className="absolute top-0 left-5 w-[41px] h-20 bg-[length:41px_80px] bg-no-repeat transform -translate-y-[12%] rotate-[10deg]"
-                                style={{ backgroundImage: `url('/boosters/${selectedBoosterType}.webp')` }}
-                            />
-                            Wonder picking this booster pack!
-                        </div>
-                    )}
-
-                    <div className="hidden opacity-0 py-2.5 leading-10 font-light bg-[#F2F8FC] text-[#878D96] rounded-[28px] shadow-[0_0_11px_0_#d7d8dc] relative mb-8 text-base transition-all duration-300 ease-in-out px-20 data-[visible=true]:inline-block data-[visible=true]:opacity-100 group-[.selectable]:inline-block group-[.selectable]:opacity-100">
-                        Pick a card
-                    </div>
-
-                    <div className="hidden opacity-0 py-2.5 leading-10 font-light bg-[#F2F8FC] text-[#878D96] rounded-[28px] shadow-[0_0_11px_0_#d7d8dc] relative mb-8 text-base transition-all duration-300 ease-in-out px-20 data-[visible=true]:inline-block data-[visible=true]:opacity-100 group-[.end]:inline-block group-[.end]:opacity-100">
-                        Wonder pick result:
-                    </div>
-                </div>
-                <div className={`content-cards ${gameState}`}>
-                    {cards.map((card, index) => (
-                        <div
-                            id={`card-${game}-${index}`}
-                            className='card'
-                            key={`card-${game}-${index}`}
-                            onClick={() => {
-                                selectCard(index, card);
-                            }}
-                        >
-                            <div className="card-inner">
-                                <div className="front" style={{ backgroundImage: `url("${card.image}")` }} />
-                                <div className="back" />
-                            </div>
-                            <div className='popup-picked'>Picked!</div>
-                        </div>
-                    ))}
-                    <div className='relative top-0 left-0 z-[1]'>
-                        <img
-                            src="/game-mask.webp"
-                            alt=""
-                            className="relative block w-full m-0"
-                        />
-                    </div>
-                    {gameState.includes('whirlwind') && (
-                        <div className="content-whirlwind">
-                            <div className="inner">
-                                <div className="banner">
-                                    {[...Array(24)].map((e, i) => <span className="panel" key={i} />)}
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                </div>
-                <div className='mt-8 relative flex gap-4 items-center justify-center'>
-                    {gameState === '' && (
-                        <>
-                            <button
-                                onClick={startWonderPick}
-                                className="px-10 py-2.5 h-12 box-border font-medium border-none bg-gradient-to-t from-[#37e6d5] to-[#1decb5] text-white rounded-full transition-all duration-300 ease-in-out shadow-md select-none text-base cursor-pointer hover:from-[#51F7CB] hover:to-[#1decb5] active:shadow-xl"
-                            >
-                                Start
-                            </button>
-                            <button
-                                onClick={() => { resetGame(); }}
-                                className="relative px-10 py-2.5 h-12 box-border font-medium border-none bg-gradient-to-t from-[#fff] to-[#fff] rounded-full transition-all duration-300 ease-in-out select-none shadow-md text-[#3A4452] cursor-pointer hover:from-[#f4f4f4] hover:to-[#f4f4f4] active:shadow-xl"
-                            >
-                                <span className="absolute top-[3px] bottom-[3px] left-[3px] right-[3px] border-2 rounded-full border-[#55DBE8]" />
-                                Reload
-                            </button>
-                        </>
-                    )}
-                    {gameState === 'end' && (
-                        <button
-                            onClick={() => { resetGame(); }}
-                            className="relative px-10 py-2.5 h-12 box-border font-medium border-none bg-gradient-to-t from-[#fff] to-[#fff] rounded-full transition-all duration-300 ease-in-out select-none shadow-md text-[#3A4452] cursor-pointer hover:from-[#f4f4f4] hover:to-[#f4f4f4] active:shadow-xl"
-                        >
-                            <span className="absolute top-[3px] bottom-[3px] left-[3px] right-[3px] border-2 rounded-full border-[#55DBE8]" />
-                            New Pick
-                        </button>
-                    )}
-                </div>
+                <GameTitle selectedBoosterType={selectedBoosterType} gameState={gameState} />
+                <ContentCards gameState={gameState} game={game} cards={cards} selectCard={selectCard} />
+                <GameActions gameState={gameState} start={startWonderPick} reset={resetGame} />
             </div>
             <Preferences onSave={resetGame} />
         </>

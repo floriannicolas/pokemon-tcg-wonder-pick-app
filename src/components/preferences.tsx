@@ -82,7 +82,7 @@ export default function Preferences({
                         <Menu />
                     </Button>
                 </SheetTrigger>
-                <SheetContent>
+                <SheetContent className='flex flex-col overflow-y-auto'>
                     <SheetHeader>
                         <SheetTitle>Preferences</SheetTitle>
                         <SheetDescription>
@@ -156,6 +156,9 @@ export default function Preferences({
                             </SheetFooter>
                         </form>
                     </Form>
+                    <div className='text-sm mt-auto'>
+                        <span className='font-bold'>Disclaimer:</span> This is a fan-made project and is not affiliated with, sponsored, or endorsed by Nintendo, The Pokémon Company, or Game Freak.
+                    </div>
                 </SheetContent>
             </Sheet>
         </>

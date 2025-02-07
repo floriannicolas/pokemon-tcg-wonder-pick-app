@@ -2,8 +2,63 @@
 "use client";
 
 import "@/app/styles/booster-roulette.css";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export default function Game() {
+    const [rotation, setRotation] = useState(0);
+    const [isDragging, setIsDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [currentRotation, setCurrentRotation] = useState(0);
+    const [velocity, setVelocity] = useState(0);
+    const lastMouseX = useRef(0);
+    const animationFrame = useRef<number>(0);
+
+    useEffect(() => {
+        return () => {
+            if (animationFrame.current) {
+                cancelAnimationFrame(animationFrame.current);
+            }
+        };
+    }, []);
+
+    const updateRotation = useCallback(() => {
+        if (!isDragging && Math.abs(velocity) > 0.1) {
+            setRotation(prev => prev + velocity);
+            setVelocity(prev => prev * 0.5); // Facteur de ralentissement
+            animationFrame.current = requestAnimationFrame(updateRotation);
+        }
+    }, [isDragging, velocity]);
+
+    const handleMouseDown = (e: React.MouseEvent) => {
+        setIsDragging(true);
+        setStartX(e.clientX);
+        setCurrentRotation(rotation);
+        lastMouseX.current = e.clientX;
+        setVelocity(0);
+        if (animationFrame.current) {
+            cancelAnimationFrame(animationFrame.current);
+        }
+    };
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (!isDragging) return;
+        
+        const deltaX = e.clientX - startX;
+        const sensitivity = 0.5;
+        const newRotation = currentRotation + (deltaX * sensitivity);
+        setRotation(newRotation);
+
+        // Calcul de la vélocité
+        const instantVelocity = (e.clientX - lastMouseX.current) * sensitivity;
+        setVelocity(instantVelocity);
+        lastMouseX.current = e.clientX;
+    };
+
+    const handleMouseUp = () => {
+        setIsDragging(false);
+        updateRotation();
+    };
+
     return (
         <>
             <div className="text-center mx-auto max-w-7xl p-8">
@@ -20,7 +75,14 @@ export default function Game() {
                     </div>
                     <div className="content-roulette">
                         <div className="inner">
-                            <div className="banner">
+                            <div
+                                className="banner"
+                                style={{ transform: `rotateY(${rotation}deg)` }}
+                                onMouseDown={handleMouseDown}
+                                onMouseMove={handleMouseMove}
+                                onMouseUp={handleMouseUp}
+                                onMouseLeave={handleMouseUp}
+                            >
                                 {[...Array(15)].map((e, i) => (
                                     <div className="panel" key={i}>
                                         <div className="booster-container">

@@ -25,7 +25,9 @@
 .content-roulette .banner {
     display: flex;
     transform-style: preserve-3d;
-    /*animation: rotateTornado .3s infinite linear;*/
+    /* Remplacer l'animation par une transformation contrôlée par JS */
+    transform: rotateY(0deg);
+    transition: transform 0.05s linear;
 }
 
 

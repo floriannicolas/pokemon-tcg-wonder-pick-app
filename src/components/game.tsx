@@ -51,9 +51,9 @@ export default function Game({
         setGameState('started flipped centered shuffled');
         await delay(200);
         setGameState('started flipped centered shuffled whirlwind');
-        await delay(500);
+        await delay(600);
         setGameState('started flipped centered shuffled');
-        await delay(1000);
+        await delay(1100);
         setGameState('started flipped centered');
         await delay(200);
         setGameState('started flipped');

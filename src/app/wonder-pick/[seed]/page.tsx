@@ -1,4 +1,4 @@
-import Game from "@/components/game";
+import Game from "@/components/wonder-pick/game";
 import { getWonderPickResponseFromSeed } from "@/utils/wonder-pick";
 import { notFound } from "next/navigation";
 

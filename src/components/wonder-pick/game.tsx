@@ -15,6 +15,7 @@ import GameTitle from "./game-title";
 import GameActions from "./game-actions";
 import { CardStars } from "./card-stars";
 import ContentCards from "./content-cards";
+import { loadImage } from "@/utils/load-image";
 
 export default function Game({
     seedResponse,
@@ -99,11 +100,11 @@ export default function Game({
         }
 
         const frontList = cardItem.getElementsByClassName('front');
-        if (frontList && frontList.length > 0) {
+        if (frontList && frontList.length > 0 && forcedCard?.image) {
             const front = frontList[0] as HTMLDivElement;
-            front.style.backgroundImage = `url(${forcedCard?.image})`;
+            front.style.backgroundImage = `url(${forcedCard.image})`;
+            await loadImage(forcedCard.image);
         }
-        await delay(200);
 
         const starsRoot = document.createElement('div');
         const root = createRoot(starsRoot);

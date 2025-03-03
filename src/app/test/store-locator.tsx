@@ -33,5 +33,6 @@ export default function StoreLocator() {
 
   console.log("isLoaded", isLoaded);
 
+  // @ts-expect-error it's ok, the web component is loaded by the above script
   return <myli-store-locator></myli-store-locator>;
 }

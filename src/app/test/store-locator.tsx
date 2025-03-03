@@ -16,7 +16,7 @@ export default function StoreLocator() {
     // Config pour le micro-frontend
     (window as any).myliStoreLocatorConfig = {
       apiKey: "4d5b7598-7ce4-4533-b0c0-f2147b175fd9",
-      label: "Pokémon",
+      label: "Vapiano",
       style: {
         mainColor: "#D40128",
       },

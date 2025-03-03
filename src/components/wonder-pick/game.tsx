@@ -135,7 +135,7 @@ export default function Game({
     }
 
     return (
-        <>
+        <div className="flex place-items-center min-h-dvh">
             <div className="text-center mx-auto max-w-7xl p-8">
                 <div className="absolute top-0 left-0 w-full h-[25vh] bg-[#e0eaf5] [clip-path:polygon(0_0,100%_0,100%_80%,0%_100%)]" />
                 <div className="absolute bottom-0 left-0 w-full h-[25vh] bg-[#dde7f3] [clip-path:polygon(0_20%,100%_0,100%_100%,0%_100%)]" />
@@ -144,6 +144,6 @@ export default function Game({
                 <GameActions gameState={gameState} start={startWonderPick} reset={resetGame} />
             </div>
             <Preferences onSave={resetGame} />
-        </>
+        </div>
     );
 }

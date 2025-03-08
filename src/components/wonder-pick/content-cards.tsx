@@ -38,7 +38,7 @@ export default function ContentCards({
                     <div className='popup-picked'>Picked!</div>
                 </div>
             ))}
-            <div className='relative top-0 left-0 z-[1]'>
+            <div className='relative top-0 left-0 z-1'>
                 <img
                     src="/game-mask.webp"
                     alt=""

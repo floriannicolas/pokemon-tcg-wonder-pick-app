@@ -140,7 +140,7 @@ export default function Preferences({
                                         <FormLabel>Pick only God Packs:</FormLabel>
                                         <FormControl>
                                             <Switch
-                                                className="!mt-0"
+                                                className="mt-0!"
                                                 checked={field.value}
                                                 onCheckedChange={field.onChange}
                                             />
